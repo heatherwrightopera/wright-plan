@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wright Opera House — Strategic Plan 2026–2028</title>
+<style>
+  :root {
+    --maroon: #7B2D3E;
+    --maroon-light: #f5eaed;
+    --gold: #C4973A;
+    --gold-light: #fdf5e6;
+    --dark: #1a1a1a;
+    --mid: #555;
+    --muted: #888;
+    --border: #e0dbd4;
+    --bg: #faf8f5;
+    --white: #fff;
+    --green: #3a7d44;
+    --green-light: #eaf3ec;
+    --yellow-light: #fffbea;
+    --red-light: #fdf0f0;
+    --red: #b33a3a;
+    --blue: #2a5fa5;
+    --blue-light: #eef3fb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: var(--bg); color: var(--dark); font-size: 15px; line-height: 1.6; }
+
+  .top-bar { background: var(--maroon); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .top-bar h1 { color: #fff; font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+  .top-bar span { color: var(--gold); font-size: 13px; }
+
+  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
+  nav button { background: none; border: none; border-bottom: 3px solid transparent; padding: 14px 18px; font-family: Georgia, serif; font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; transition: color 0.15s; }
+  nav button:hover { color: var(--maroon); }
+  nav button.active { color: var(--maroon); border-bottom-color: var(--gold); font-weight: 700; }
+
+  .content { max-width: 900px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  h2 { font-size: 22px; color: var(--maroon); margin-bottom: 6px; }
+  h3 { font-size: 16px; color: var(--maroon); margin: 28px 0 10px; font-weight: 700; }
+  h4 { font-size: 14px; color: var(--gold); margin: 20px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  p { color: var(--mid); margin-bottom: 12px; font-size: 14px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+
+  .progress-bar-wrap { background: var(--border); border-radius: 99px; height: 8px; margin: 8px 0 4px; }
+  .progress-bar { height: 8px; border-radius: 99px; background: var(--gold); transition: width 0.4s; }
+  .progress-bar.complete { background: var(--green); }
+  .pct-label { font-size: 12px; color: var(--muted); }
+
+  .phase-header { background: var(--maroon); color: #fff; padding: 12px 20px; border-radius: 8px; margin: 28px 0 16px; display: flex; align-items: baseline; gap: 12px; }
+  .phase-header .phase-tag { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .phase-header .phase-title { font-size: 16px; font-weight: 700; }
+  .phase-header .phase-months { font-size: 12px; color: rgba(255,255,255,0.6); margin-left: auto; }
+
+  .priority-card { border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; background: var(--white); margin-bottom: 16px; overflow: hidden; }
+  .priority-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; user-select: none; }
+  .priority-header:hover { background: var(--gold-light); }
+  .priority-num { background: var(--gold); color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .priority-title { font-size: 15px; font-weight: 700; color: var(--maroon); flex: 1; }
+  .priority-meta { font-size: 12px; color: var(--muted); }
+  .chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+  .priority-card.open .chevron { transform: rotate(180deg); }
+  .priority-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  .priority-card.open .priority-body { display: block; }
+  .priority-body p { margin-top: 12px; }
+  .meta-row { display: flex; gap: 24px; margin: 12px 0 0; flex-wrap: wrap; }
+  .meta-item label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); display: block; margin-bottom: 2px; }
+  .meta-item span { font-size: 13px; color: var(--dark); }
+
+  .notes-area { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-family: Georgia, serif; font-size: 13px; color: var(--dark); background: var(--bg); resize: vertical; min-height: 80px; margin-top: 10px; }
+  .notes-area:focus { outline: none; border-color: var(--gold); }
+  .notes-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 12px; display: block; }
+
+  .milestone-section { margin-bottom: 32px; }
+  .milestone-period { font-size: 13px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .milestone-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .milestone-row:last-child { border-bottom: none; }
+  .blocked-note-wrap { padding: 6px 0 10px 42px; display: none; }
+  .blocked-note-wrap.visible { display: block; }
+  .blocked-note { width: 100%; border: 1px solid var(--red); border-radius: 6px; padding: 8px 10px; font-family: Georgia, serif; font-size: 12px; color: var(--dark); background: var(--red-light); resize: vertical; min-height: 52px; }
+  .blocked-note:focus { outline: none; border-color: var(--red); }
+  .blocked-note::placeholder { color: #c47a7a; }
+  .milestone-check { flex-shrink: 0; margin-top: 2px; }
+  .milestone-check input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--green); }
+  .milestone-text { flex: 1; }
+  .milestone-text .m-title { font-size: 14px; color: var(--dark); }
+  .milestone-text .m-title.done { text-decoration: line-through; color: var(--muted); }
+  .milestone-text .m-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .milestone-status { flex-shrink: 0; }
+  select.status-select { border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; font-family: Georgia, serif; background: var(--white); color: var(--dark); cursor: pointer; }
+  select.status-select.s-complete { background: var(--green-light); color: var(--green); border-color: var(--green); }
+  select.status-select.s-inprogress { background: var(--yellow-light); color: #7a6000; border-color: #c8a800; }
+  select.status-select.s-blocked { background: var(--red-light); color: var(--red); border-color: var(--red); }
+  select.status-select.s-notstarted { background: var(--white); color: var(--muted); }
+
+  .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+  .stat-card .stat-num { font-size: 28px; font-weight: 700; color: var(--maroon); }
+  .stat-card .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .built-section { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .built-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .built-card h4 { margin-top: 0; font-size: 13px; }
+  .built-card ul { list-style: none; padding: 0; }
+  .built-card ul li { font-size: 13px; color: var(--mid); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .built-card ul li:last-child { border-bottom: none; }
+  .built-card ul li::before { content: "✓"; color: var(--green); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .asterisk { color: var(--gold); font-size: 11px; }
+
+  .session-timeline { display: flex; flex-direction: column; gap: 0; margin: 20px 0; position: relative; padding-left: 32px; }
+  .session-timeline::before { content: ""; position: absolute; left: 10px; top: 12px; bottom: 12px; width: 2px; background: var(--border); }
+  .session-item { position: relative; padding: 14px 0 14px 16px; }
+  .session-dot { position: absolute; left: -26px; top: 18px; width: 14px; height: 14px; border-radius: 50%; background: var(--maroon); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--maroon); }
+  .session-dot.tbd { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .session-label { font-size: 13px; font-weight: 700; color: var(--maroon); }
+  .session-who { font-size: 12px; color: var(--muted); margin: 2px 0; }
+  .session-date { font-size: 12px; color: var(--dark); }
+
+  .success-list { list-style: none; padding: 0; }
+  .success-list li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--mid); }
+  .success-list li:last-child { border-bottom: none; }
+  .success-list .check-icon { color: var(--green); font-size: 16px; flex-shrink: 0; }
+
+  .overall-progress { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .overall-progress h3 { margin-top: 0; }
+
+  @media (max-width: 600px) {
+    .content { padding: 20px 14px 48px; }
+    .built-section { grid-template-columns: 1fr; }
+    .top-bar { padding: 12px 16px; }
+    nav { padding: 0 8px; }
+    nav button { padding: 12px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>Wright Opera House — Strategic Plan 2026–2028</h1>
+  <span>Internal Planning Document</span>
+</div>
+
+<nav id="main-nav">
+  <button class="active" onclick="showTab('overview')">Overview</button>
+  <button onclick="showTab('sessions')">Planning Sessions</button>
+  <button onclick="showTab('priorities')">Priorities</button>
+  <button onclick="showTab('milestones')">Milestones</button>
+  <button onclick="showTab('success')">What Success Looks Like</button>
+</nav>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section active" id="tab-overview">
+    <h2>Strategic Overview</h2>
+    <p class="subtitle">Foundation before revenue. Revenue before growth. The order matters because each one builds for the next.</p>
+
+    <div class="overall-progress" id="overall-progress-card">
+      <h3>Overall Milestone Progress</h3>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="overall-bar" style="width:0%"></div></div>
+      <div class="pct-label"><span id="overall-pct">0</span>% of milestones marked complete</div>
+    </div>
+
+    <div class="overview-grid">
+      <div class="stat-card"><div class="stat-num">127</div><div class="stat-label">Events scheduled in 2026</div></div>
+      <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Active major donors</div></div>
+      <div class="stat-card"><div class="stat-num">$15K</div><div class="stat-label">Grants awarded 2026</div></div>
+      <div class="stat-card"><div class="stat-num">$40K</div><div class="stat-label">Grants pending</div></div>
+      <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Strategic priorities</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Phases</div></div>
+    </div>
+
+    <h3>Our Vision</h3>
+    <p style="font-style:italic; color: var(--dark); font-size:15px; border-left: 3px solid var(--gold); padding-left: 14px; margin: 0 0 20px;">The Wright Opera House is the enduring cultural heart of Ouray, where history is preserved, creativity thrives, and community comes together for generations.</p>
+
+    <h3>What We've Built Together</h3>
+    <p style="font-size:13px; color:var(--muted);">Items marked <span class="asterisk">★</span> were identified as needs in our 2021 and 2023 planning sessions.</p>
+    <div class="built-section">
+      <div class="built-card">
+        <h4>Operations & Staffing</h4>
+        <ul>
+          <li>Reorganized workspace so people can actually find things <span class="asterisk">★</span></li>
+          <li>Six operational policies documented</li>
+          <li>Document of Truth created — no more crossed wires</li>
+          <li>Kate is no longer doing seventeen jobs <span class="asterisk">★</span></li>
+          <li>Volunteer training, oversight, scheduling <span class="asterisk">★</span></li>
+        </ul>
+      </div>
+      <div class="built-card">
+        <h4>Marketing & Communications</h4>
+        <ul>
+          <li>Redesigned website — easier tickets, ADA compliant <span class="asterisk">★</span></li>
+          <li>Dedicated wedding website, 2–3 click experience</li>
+          <li>Growing social media — thanks, Jacob! <span class="asterisk">★</span></li>
+        </ul>
+      </div>
+      <div class="built-card">
+        <h4>Programming</h4>
+        <ul>
+          <li>Full one-year advance programming plan</li>
+          <li>Roller Disco, aerial silks, Pride events, music <span class="asterisk">★</span></li>
+          <li>Program evaluation process built</li>
+          <li>Film Fest: profitable, year 7 <span class="asterisk">★</span></li>
+        </ul>
+      </div>
+      <div class="built-card">
+        <h4>Development & Governance</h4>
+        <ul>
+          <li>$15K grants awarded, $40K pending</li>
+          <li>Membership program redesigned with real benefits</li>
+          <li>Sponsorship program built from scratch</li>
+          <li>Staff report + board president at weekly meetings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSIONS -->
+  <div class="section" id="tab-sessions">
+    <h2>Planning Sessions</h2>
+    <p class="subtitle">Four sessions to roll out the plan. Full team alignment happens at Session 4 — team-dependent work begins after that.</p>
+
+    <div class="session-timeline">
+      <div class="session-item">
+        <div class="session-dot"></div>
+        <div class="session-label">Session 1 — ED & Board</div>
+        <div class="session-date">June 6, 2026</div>
+        <div class="session-who">Strategic plan review, mission discussion, milestone alignment, sticky dot priority review</div>
+      </div>
+      <div class="session-item">
+        <div class="session-dot tbd"></div>
+        <div class="session-label">Session 2 — ED & Board</div>
+        <div class="session-date">Date TBD</div>
+        <div class="session-who">Deep board work: reserve policy, donor concentration, capital framework planning, board-owned objectives</div>
+        <span class="notes-label">Session notes</span>
+        <textarea class="notes-area" placeholder="Add notes, decisions, action items from this session..." data-key="session2-notes" rows="3"></textarea>
+      </div>
+      <div class="session-item">
+        <div class="session-dot tbd"></div>
+        <div class="session-label">Session 3 — ED & Staff</div>
+        <div class="session-date">Date TBD</div>
+        <div class="session-who">Operational priorities, program evaluation, communications cadence, staff-owned objectives</div>
+        <span class="notes-label">Session notes</span>
+        <textarea class="notes-area" placeholder="Add notes, decisions, action items from this session..." data-key="session3-notes" rows="3"></textarea>
+      </div>
+      <div class="session-item">
+        <div class="session-dot tbd"></div>
+        <div class="session-label">Session 4 — Full Team</div>
+        <div class="session-date">Date TBD — Board, ED, Staff</div>
+        <div class="session-who">Unified plan presentation, shared ownership. Team-dependent work (donor outreach, etc.) begins after this session.</div>
+        <span class="notes-label">Session notes</span>
+        <textarea class="notes-area" placeholder="Add notes, decisions, action items from this session..." data-key="session4-notes" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIORITIES -->
+  <div class="section" id="tab-priorities">
+    <h2>The Eight Priorities</h2>
+    <p class="subtitle">Click any priority to expand. Add session notes directly in the card.</p>
+
+    <div class="phase-header">
+      <span class="phase-tag">Phase 1</span>
+      <span class="phase-title">Foundation & Credibility</span>
+      <span class="phase-months">Months 1–6</span>
+    </div>
+
+    <div class="priority-card" id="p1">
+      <div class="priority-header" onclick="togglePriority('p1')">
+        <div class="priority-num">1</div>
+        <div class="priority-title">Mission Alignment & Organizational Clarity</div>
+        <div class="priority-meta">June 6 discussion · Mid-June vote</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Our community has watched The Wright grow from a beautiful venue into a producing organization. The space once created to hold the visions of others is now generating its own. Internal alignment around our evolved function — and ensuring our mission reflects that — is what makes every other priority on this list possible.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>June 6: Board discussion · Mid-June: Vote & adoption</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Agreed-upon mission statement, vision, and strategic direction</span></div>
+          <div class="meta-item"><label>Owner</label><span>Board + ED</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p1-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p2">
+      <div class="priority-header" onclick="togglePriority('p2')">
+        <div class="priority-num">2</div>
+        <div class="priority-title">Community Listening & Strategic Partnership</div>
+        <div class="priority-meta">1–4 months</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Our community has the answers. This listening tour gathers and documents them — to understand what we do well, where we can improve, and where youth engagement fits into the work we're already doing. The insight deepens relationships, brings new opportunities to light, and directly informs our 2027 programming strategy.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>1–4 months</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>15–20 documented conversations · 2–3 partnership MOUs or letters of intent</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED + Board</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p2-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p3">
+      <div class="priority-header" onclick="togglePriority('p3')">
+        <div class="priority-num">3</div>
+        <div class="priority-title">Community Accountability & Open Communication</div>
+        <div class="priority-meta">Cadence formalized by July · Ongoing</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Community updates are already live. This priority is about formalizing the standard and cadence — so our communications rhythm is consistent and reliable through email, social, and our community calendar. That reliability converts neighbors into patrons, and patrons into members and donors.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>Cadence formalized by July · Annual State of the Wright: November</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Formalized communications cadence · Annual State of the Wright event</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p3-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="phase-header">
+      <span class="phase-tag">Phase 2</span>
+      <span class="phase-title">Revenue & Stability</span>
+      <span class="phase-months">Months 4–12</span>
+    </div>
+
+    <div class="priority-card" id="p4">
+      <div class="priority-header" onclick="togglePriority('p4')">
+        <div class="priority-num">4</div>
+        <div class="priority-title">Donor Relationships & Major Gift Development</div>
+        <div class="priority-meta">Months 4–12 from plan implementation</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Two sequential parts: first, identify the specific projects and operational needs we want to raise funding for — each specific enough to explain clearly with a plain dollar ask. Then, with that clarity in place, approach donors with something specific and compelling. This is our primary path toward addressing funding needs and building sustaining relationships.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>Months 4–12 from plan implementation (after Session 4)</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Defined funding priorities · Donor prospect list · Major gift conversations initiated</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED + Board</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p4-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p5">
+      <div class="priority-header" onclick="togglePriority('p5')">
+        <div class="priority-num">5</div>
+        <div class="priority-title">Financial Stability & Long-Term Planning</div>
+        <div class="priority-meta">6–12 months</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Four focus areas: short-term rental of the Green Room ($10,000 goal), expanding our major donor base, building an operating reserve, and exploring a partnership with a local foundation for endowment management. We know where we stand. Now we build.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>6–12 months</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>3-year financial model · Reserve policy adopted · Endowment decision made · STR revenue documented</span></div>
+          <div class="meta-item"><label>Owner</label><span>Treasurer + ED + Board</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p5-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p6">
+      <div class="priority-header" onclick="togglePriority('p6')">
+        <div class="priority-num">6</div>
+        <div class="priority-title">Youth Engagement Integration</div>
+        <div class="priority-meta">Pilots underway · Sept 2026 identify 2027 collabs</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>The student film fest is done and it worked. Now we're identifying natural collaborations with current artists as the next phase. In September 2026, we'll identify additional collaboration opportunities to give us more runway to collect feedback and gauge engagement before March 2027 planning shapes the 2028 season.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>2026 pilots · Sept 2026: ID 2027 collabs · March 2027: Programming planning</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Documented pilot outcomes · 2027 collaboration opportunities identified · 2028 programming informed</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p6-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p7">
+      <div class="priority-header" onclick="togglePriority('p7')">
+        <div class="priority-num">7</div>
+        <div class="priority-title">Operational Excellence & Program Evaluation</div>
+        <div class="priority-meta">6–12 months</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>Strong operations and high-quality programming speaks for itself. This priority formalizes what's working and builds systems for smart decisions going forward — key policies (sick pay, marketing, hours of work) and a program validation structure that tells us clearly which programs to grow, revise, or retire.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>6–12 months</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Adopted organizational policies · Program validation framework with documented criteria</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED + Staff</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p7-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="priority-card" id="p8">
+      <div class="priority-header" onclick="togglePriority('p8')">
+        <div class="priority-num">8</div>
+        <div class="priority-title">Capital Project Governance</div>
+        <div class="priority-meta">Framework by Sept · Board adoption Oct</div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="priority-body">
+        <p>The Mesker Front restoration is teaching us something important: we don't yet have a shared framework for how capital projects are identified, funded, and executed. Idea → donor → figure it out has worked, but it won't scale and it creates risk. We use Mesker to build the framework so every project that follows has a defined process from the start.</p>
+        <div class="meta-row">
+          <div class="meta-item"><label>Timeline</label><span>Framework developed by September · Board adoption by October (timed to budget planning)</span></div>
+          <div class="meta-item"><label>Deliverable</label><span>Capital project governance framework adopted by board</span></div>
+          <div class="meta-item"><label>Owner</label><span>ED + Board</span></div>
+        </div>
+        <span class="notes-label">Session notes / decisions</span>
+        <textarea class="notes-area" placeholder="Add notes from planning sessions..." data-key="p8-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="phase-header" style="margin-top:32px;">
+      <span class="phase-tag">Phase 3</span>
+      <span class="phase-title">Growth & Continuity</span>
+      <span class="phase-months">Year 2+</span>
+    </div>
+    <p style="margin-top:12px;">Phase 3 priorities will be shaped by what we learn in Phases 1 and 2. We will not pursue growth we are not ready to sustain.</p>
+    <p><strong>Youth Programming:</strong> If 2026 pilots validate youth engagement as natural and sustainable, we develop structured programming with clear outcomes for 2027 and beyond.</p>
+    <p><strong>Capital Project Execution:</strong> With a governance framework in place, future projects (kitchen and beyond) move forward with defined scope, funding plans, and clear leadership roles.</p>
+  </div>
+
+  <!-- MILESTONES -->
+  <div class="section" id="tab-milestones">
+    <h2>Milestones</h2>
+    <p class="subtitle">Check off milestones as they're completed. Update status in real time during planning sessions.</p>
+
+    <div class="overall-progress" id="milestone-progress-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <strong style="font-size:14px;">Overall progress</strong>
+        <span class="pct-label"><span id="m-pct">0</span>% complete</span>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="m-bar" style="width:0%"></div></div>
+    </div>
+
+    <div id="milestone-list"></div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="section" id="tab-success">
+    <h2>What Success Looks Like in 2026</h2>
+    <p class="subtitle">We will know this year has been a success when:</p>
+    <ul class="success-list">
+      <li><span class="check-icon">◎</span>Programming is delivered consistently at a high standard, proving 2025 was not a fluke but a new baseline</li>
+      <li><span class="check-icon">◎</span>Our partner listening tour is complete, documented, and already shaping 2027 planning</li>
+      <li><span class="check-icon">◎</span>Every affected donor has been personally contacted and relationships are actively being rebuilt</li>
+      <li><span class="check-icon">◎</span>Youth engagement pilots are documented with clear learnings captured</li>
+      <li><span class="check-icon">◎</span>A financial sustainability roadmap is in place with board-adopted reserve and contingency policies</li>
+      <li><span class="check-icon">◎</span>Community perception of The Wright as welcoming and accessible is demonstrably improving</li>
+      <li><span class="check-icon">◎</span>The Mesker front restoration is actively advancing with documented milestones</li>
+      <li><span class="check-icon">◎</span>Music programming has launched with two well-executed shows</li>
+      <li><span class="check-icon">◎</span>Our mission has been updated, voted on, and shared</li>
+      <li><span class="check-icon">◎</span>Our program evaluation framework is fully implemented and actively being used</li>
+    </ul>
+    <span class="notes-label">Year-end reflections & notes</span>
+    <textarea class="notes-area" placeholder="Add year-end reflections, what we learned, what to carry into 2027..." data-key="yearend-notes" rows="5"></textarea>
+  </div>
+
+</div>
+
+<script>
+const MILESTONES = [
+  { period: "June–July 2026", items: [
+    { id: "m1", text: "Session 1: ED & Board strategic plan review", sub: "June 6 · ED + Board" },
+    { id: "m2", text: "Board discussion: does our mission still fit?", sub: "June 6 · Board" },
+    { id: "m3", text: "Mission vote complete", sub: "Mid-June · Board" },
+    { id: "m4", text: "Confirm Mesker project leadership transition to ED", sub: "June–July · ED + Board" },
+    { id: "m5", text: "Knowledge transfer from departing board member on Mesker", sub: "Before June 30 · Board" },
+    { id: "m6", text: "Schedule meeting with Ouray County Community Fund", sub: "June–July · ED" },
+    { id: "m7", text: "Treasurer and ED begin donor concentration analysis", sub: "June–July · ED + Treasurer" },
+    { id: "m8", text: "Finalize second music booking for 2026", sub: "June–July · ED" },
+    { id: "m9", text: "Identify listening tour partner list with board input", sub: "June–July · ED + Board" },
+    { id: "m10", text: "Communications cadence and standard formalized", sub: "July · ED" },
+    { id: "m11", text: "Begin personal donor outreach", sub: "July · ED + Board" },
+    { id: "m12", text: "Session 2: ED & Board", sub: "Date TBD · ED + Board" },
+  ]},
+  { period: "August–September 2026", items: [
+    { id: "m13", text: "All donor outreach completed", sub: "August · ED + Board" },
+    { id: "m14", text: "Partner listening tour launched (15–20 conversations)", sub: "August · ED" },
+    { id: "m15", text: "Ouray County Community Fund meeting completed", sub: "August · ED" },
+    { id: "m16", text: "Board presentation: donor concentration analysis + reserve policy recommendation", sub: "August · Treasurer + ED" },
+    { id: "m17", text: "Board adopts reserve policy with target and timeline", sub: "August · Board" },
+    { id: "m18", text: "Treasurer presents contingency line methodology", sub: "August · Treasurer" },
+    { id: "m19", text: "Music show #1 executed", sub: "Aug–Sept · ED" },
+    { id: "m20", text: "Membership program assessment completed", sub: "Aug–Sept · ED" },
+    { id: "m21", text: "Capital governance framework developed", sub: "September · ED + Board" },
+    { id: "m22", text: "Identify additional youth collaboration opportunities for 2027", sub: "September · ED" },
+    { id: "m23", text: "Session 3: ED & Staff", sub: "Date TBD · ED" },
+  ]},
+  { period: "October–November 2026", items: [
+    { id: "m24", text: "Board adopts budget contingency line as formal policy", sub: "October · Board" },
+    { id: "m25", text: "Capital governance framework adopted by board", sub: "October · Board" },
+    { id: "m26", text: "Gift acceptance policy drafted and adopted", sub: "October · Board + ED" },
+    { id: "m27", text: "Partner listening tour completed", sub: "October · ED" },
+    { id: "m28", text: "Music show #2 executed", sub: "October · ED" },
+    { id: "m29", text: "Wright Winter Roll Year 2 planning finalized", sub: "October · ED" },
+    { id: "m30", text: "State of the Wright planning underway", sub: "October · ED" },
+    { id: "m31", text: "Membership program refinements implemented", sub: "October · ED" },
+    { id: "m32", text: "Session 4: Full Team — Board, ED, Staff", sub: "Date TBD · All" },
+    { id: "m33", text: "State of the Wright executed", sub: "November · ED + Board" },
+  ]},
+  { period: "November–December 2026", items: [
+    { id: "m34", text: "Wright Winter Roll Year 2 executed", sub: "Nov–Dec · ED" },
+    { id: "m35", text: "Listening tour synthesis report completed", sub: "December · ED" },
+    { id: "m36", text: "Youth pilot assessment completed; 2027 decisions made", sub: "December · ED" },
+    { id: "m37", text: "Music programming assessment; 2027 decision made", sub: "December · ED" },
+    { id: "m38", text: "2027 budget built with contingency line included", sub: "December · Treasurer + ED" },
+    { id: "m39", text: "Three-year financial model initiated", sub: "December · Treasurer + ED" },
+    { id: "m40", text: "2027 programming season planned and marketed", sub: "December · ED" },
+  ]},
+  { period: "Year 2 — 2027", items: [
+    { id: "m41", text: "Youth programming planning session", sub: "March 2027 · ED" },
+    { id: "m42", text: "Structured youth programming strategy adopted (if pilots validate)", sub: "2027 · ED + Board" },
+    { id: "m43", text: "Capital campaign feasibility study initiated", sub: "2027 · ED + Board" },
+  ]},
+];
+
+function loadState() {
+  try { return JSON.parse(localStorage.getItem('wright-plan') || '{}'); } catch(e) { return {}; }
+}
+function saveState(state) {
+  try { localStorage.setItem('wright-plan', JSON.stringify(state)); } catch(e) {}
+}
+let state = loadState();
+
+function renderMilestones() {
+  const container = document.getElementById('milestone-list');
+  container.innerHTML = '';
+  MILESTONES.forEach(period => {
+    const periodDiv = document.createElement('div');
+    periodDiv.className = 'milestone-section';
+    periodDiv.innerHTML = `<div class="milestone-period">${period.period}</div>`;
+    period.items.forEach(item => {
+      const checked = state['check-' + item.id] || false;
+      const status = state['status-' + item.id] || 'notstarted';
+      const row = document.createElement('div');
+      const blockedNote = state['blocked-' + item.id] || '';
+      const isBlocked = status === 'blocked';
+      row.className = 'milestone-row';
+      row.innerHTML = `
+        <div class="milestone-check">
+          <input type="checkbox" id="${item.id}" ${checked ? 'checked' : ''} onchange="toggleCheck('${item.id}', this.checked)">
+        </div>
+        <div class="milestone-text">
+          <div class="m-title ${checked ? 'done' : ''}" id="title-${item.id}">${item.text}</div>
+          <div class="m-sub">${item.sub}</div>
+        </div>
+        <div class="milestone-status">
+          <select class="status-select s-${status}" id="sel-${item.id}" onchange="changeStatus('${item.id}', this.value)">
+            <option value="notstarted" ${status==='notstarted'?'selected':''}>Not started</option>
+            <option value="inprogress" ${status==='inprogress'?'selected':''}>In progress</option>
+            <option value="complete" ${status==='complete'?'selected':''}>Complete</option>
+            <option value="blocked" ${status==='blocked'?'selected':''}>Blocked</option>
+          </select>
+        </div>`;
+      const noteWrap = document.createElement('div');
+      noteWrap.className = 'blocked-note-wrap' + (isBlocked ? ' visible' : '');
+      noteWrap.id = 'blocked-wrap-' + item.id;
+      noteWrap.innerHTML = `<textarea class="blocked-note" placeholder="What's blocking this? Who needs to act?" id="blocked-note-${item.id}">${blockedNote}</textarea>`;
+      periodDiv.appendChild(row);
+      periodDiv.appendChild(noteWrap);
+    });
+    container.appendChild(periodDiv);
+  });
+  updateProgress();
+}
+
+function toggleCheck(id, checked) {
+  state['check-' + id] = checked;
+  document.getElementById('title-' + id).className = 'm-title' + (checked ? ' done' : '');
+  if (checked) {
+    const sel = document.getElementById('sel-' + id);
+    sel.value = 'complete';
+    sel.className = 'status-select s-complete';
+    state['status-' + id] = 'complete';
+  }
+  saveState(state);
+  updateProgress();
+}
+
+function changeStatus(id, val) {
+  state['status-' + id] = val;
+  document.getElementById('sel-' + id).className = 'status-select s-' + val;
+  if (val === 'complete') {
+    document.getElementById(id).checked = true;
+    state['check-' + id] = true;
+    document.getElementById('title-' + id).className = 'm-title done';
+  }
+  const wrap = document.getElementById('blocked-wrap-' + id);
+  if (wrap) {
+    if (val === 'blocked') {
+      wrap.classList.add('visible');
+      const noteEl = document.getElementById('blocked-note-' + id);
+      if (noteEl) noteEl.focus();
+    } else {
+      wrap.classList.remove('visible');
+    }
+  }
+  saveState(state);
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = MILESTONES.reduce((a, p) => a + p.items.length, 0);
+  const done = MILESTONES.reduce((a, p) => a + p.items.filter(i => state['check-' + i.id]).length, 0);
+  const pct = Math.round((done / total) * 100);
+  ['overall-bar','m-bar'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.width = pct + '%'; el.className = 'progress-bar' + (pct === 100 ? ' complete' : ''); }
+  });
+  ['overall-pct','m-pct'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = pct;
+  });
+}
+
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('#main-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function togglePriority(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function initNotes() {
+  document.querySelectorAll('.notes-area').forEach(el => {
+    const key = el.dataset.key;
+    if (state[key]) el.value = state[key];
+    el.addEventListener('input', () => { state[key] = el.value; saveState(state); });
+  });
+  document.querySelectorAll('.blocked-note').forEach(el => {
+    const id = el.id.replace('blocked-note-', '');
+    el.addEventListener('input', () => { state['blocked-' + id] = el.value; saveState(state); });
+  });
+}
+
+renderMilestones();
+initNotes();
+updateProgress();
+</script>
+</body>
+</html>
