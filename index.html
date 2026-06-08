@@ -3,925 +3,1008 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wright Opera House — Strategic Plan 2026–2028</title>
+<title>Wright Opera House — Strategic Plan Tracker 2026</title>
 <style>
 :root {
-  --maroon: #7B2D3E; --maroon-light: #f5eaed; --gold: #C4973A; --gold-light: #fdf5e6;
-  --dark: #1a1a1a; --mid: #444; --muted: #888; --border: #e0dbd4; --bg: #faf8f5; --white: #fff;
-  --green: #3a7d44; --green-light: #eaf3ec; --green-bright: #2d7a3a;
-  --yellow-light: #fffbea; --red-light: #fdf0f0; --red: #b33a3a;
-  --blue: #2a5fa5; --blue-light: #eef3fb; --pink: #e85d8a; --pink-light: #fdeef5;
+  --maroon: #7B2D3E;
+  --maroon-light: #f5eaed;
+  --gold: #C4973A;
+  --gold-light: #fdf5e6;
+  --dark: #1a1a1a;
+  --mid: #444;
+  --muted: #888;
+  --border: #e0dbd4;
+  --bg: #faf8f5;
+  --white: #fff;
+  --green: #3a7d44;
+  --green-light: #eaf3ec;
+  --yellow: #d4920a;
+  --yellow-light: #fffbea;
+  --red: #b33a3a;
+  --red-light: #fdf0f0;
+  --blue: #2a5fa5;
+  --blue-light: #eef3fb;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: Georgia, serif; background: var(--bg); color: var(--dark); font-size: 15px; line-height: 1.6; }
+
+/* TOP BAR */
 .top-bar { background: var(--maroon); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.top-bar h1 { color: #fff; font-size: 17px; font-weight: 700; }
+.top-bar h1 { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.01em; }
 .top-bar span { color: var(--gold); font-size: 13px; }
-nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; overflow-x: auto; }
-nav button { background: none; border: none; border-bottom: 3px solid transparent; padding: 14px 16px; font-family: Georgia, serif; font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; }
+
+/* NAV */
+nav { background: var(--white); border-bottom: 2px solid var(--border); padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
+nav button { background: none; border: none; border-bottom: 3px solid transparent; padding: 14px 18px; font-family: Georgia, serif; font-size: 13px; color: var(--muted); cursor: pointer; white-space: nowrap; transition: color 0.15s; margin-bottom: -2px; }
 nav button:hover { color: var(--maroon); }
 nav button.active { color: var(--maroon); border-bottom-color: var(--gold); font-weight: 700; }
-.content { max-width: 940px; margin: 0 auto; padding: 32px 24px 80px; }
-.section { display: none; } .section.active { display: block; }
-h2 { font-size: 22px; color: var(--maroon); margin-bottom: 6px; }
-h3 { font-size: 16px; color: var(--maroon); margin: 28px 0 10px; font-weight: 700; }
-h4 { font-size: 13px; color: var(--gold); margin: 18px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-p { color: var(--mid); margin-bottom: 12px; font-size: 14px; }
-.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
-.progress-bar-wrap { background: var(--border); border-radius: 99px; height: 8px; margin: 8px 0 4px; }
-.progress-bar { height: 8px; border-radius: 99px; background: var(--gold); transition: width 0.4s; }
-.progress-bar.complete { background: var(--green); }
-.pct-label { font-size: 12px; color: var(--muted); }
-.overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
-.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
-.stat-card .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
-.stat-card input.stat-edit { font-size: 22px; font-weight: 700; color: var(--maroon); font-family: Georgia, serif; border: none; border-bottom: 2px dashed var(--gold); background: transparent; width: 100%; text-align: center; outline: none; }
-.built-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
-.built-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
-.built-card h4 { margin-top: 0; }
-.built-card ul { list-style: none; padding: 0; }
-.built-card ul li { font-size: 13px; color: var(--mid); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
-.built-card ul li:last-child { border-bottom: none; }
-.built-card ul li::before { content: "✓"; color: var(--green); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-.asterisk { color: var(--gold); font-size: 11px; }
-.overall-progress { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
-.phase-header { background: var(--maroon); color: #fff; padding: 12px 20px; border-radius: 8px; margin: 28px 0 14px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.phase-tag { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
-.phase-title { font-size: 16px; font-weight: 700; }
-.phase-months { font-size: 12px; color: rgba(255,255,255,0.6); margin-left: auto; }
-/* PRIORITY CARDS */
-.priority-card { border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; background: var(--white); margin-bottom: 14px; overflow: hidden; transition: border-left-color 0.2s; }
-.priority-card.confidence-green { border-left-color: var(--green-bright); }
-.priority-card.confidence-yellow { border-left-color: #c8a800; }
-.priority-card.confidence-red { border-left-color: var(--red); }
-.priority-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; user-select: none; }
-.priority-header:hover { background: var(--gold-light); }
-.priority-num { background: var(--gold); color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-.priority-title { font-size: 15px; font-weight: 700; color: var(--maroon); flex: 1; }
-.priority-meta { font-size: 11px; color: var(--muted); white-space: nowrap; }
-.chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
-.priority-card.open .chevron { transform: rotate(180deg); }
-.priority-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
-.priority-card.open .priority-body { display: block; }
-.priority-body p { margin-top: 12px; }
-.meta-row { display: flex; gap: 20px; margin: 12px 0 0; flex-wrap: wrap; }
-.meta-item label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); display: block; margin-bottom: 2px; }
-.meta-item span { font-size: 13px; color: var(--dark); }
+
+/* LAYOUT */
+.content { max-width: 980px; margin: 0 auto; padding: 32px 24px 80px; }
+.section { display: none; }
+.section.active { display: block; }
+
+h2 { font-size: 22px; color: var(--maroon); margin-bottom: 4px; }
+h3 { font-size: 15px; color: var(--maroon); margin: 24px 0 10px; font-weight: 700; }
+p.subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+p { color: var(--mid); font-size: 14px; margin-bottom: 10px; }
+
+/* DASHBOARD */
+.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 20px; }
+.dash-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
+.dash-card .phase-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+.dash-card h4 { font-size: 14px; color: var(--dark); margin-bottom: 10px; font-weight: 700; }
+.progress-wrap { background: var(--border); border-radius: 99px; height: 7px; margin: 8px 0 4px; }
+.progress-fill { height: 7px; border-radius: 99px; background: var(--gold); transition: width 0.4s; }
+.progress-fill.done { background: var(--green); }
+.pct { font-size: 12px; color: var(--muted); }
+.dot-summary { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; cursor: default; }
+.dot.green { background: #3a7d44; }
+.dot.yellow { background: #e6ac2b; }
+.dot.red { background: #b33a3a; }
+
+/* PHASE HEADERS */
+.phase-header { background: var(--maroon); color: #fff; border-radius: 6px; padding: 10px 16px; margin: 32px 0 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* PRIORITY BLOCK */
+.priority-block { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+.priority-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; cursor: pointer; }
+.priority-header:hover { background: var(--bg); }
+.priority-title { display: flex; align-items: center; gap: 10px; }
+.priority-num { background: var(--maroon); color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.priority-name { font-size: 15px; font-weight: 700; color: var(--dark); }
+.priority-note { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 2px; }
+.chevron { color: var(--muted); font-size: 16px; transition: transform 0.2s; flex-shrink: 0; margin-top: 2px; }
+.priority-block.open .chevron { transform: rotate(180deg); }
+
 /* DOT VOTING */
-.dot-voting-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
-.dot-voting-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: block; }
-.dot-voting-controls { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
-.dot-add-group { display: flex; align-items: center; gap: 8px; }
-.dot-add-btn { width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer; font-size: 18px; font-weight: 700; color: #fff; display: flex; align-items: center; justify-content: center; line-height: 1; transition: transform 0.1s, box-shadow 0.1s; }
-.dot-add-btn:hover { transform: scale(1.12); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.dot-add-btn.gbtn { background: #2d7a3a; }
-.dot-add-btn.ybtn { background: #c8a800; }
-.dot-add-btn.rbtn { background: #b33a3a; }
-.dot-add-label { font-size: 12px; font-weight: 700; }
-.dot-add-label.gl { color: #2d7a3a; } .dot-add-label.yl { color: #7a6000; } .dot-add-label.rl { color: #b33a3a; }
-.dot-display-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 28px; padding: 4px 0; }
-.dot { width: 22px; height: 22px; border-radius: 50%; display: inline-block; cursor: pointer; transition: transform 0.1s; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-.dot:hover { transform: scale(1.2); }
-.dot.gd { background: radial-gradient(circle at 35% 35%, #5bc97a, #2d7a3a); }
-.dot.yd { background: radial-gradient(circle at 35% 35%, #ffe566, #c8a800); }
-.dot.rd { background: radial-gradient(circle at 35% 35%, #e87070, #b33a3a); }
-.dot-empty-hint { font-size: 11px; color: var(--muted); font-style: italic; }
+.dot-voter { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.dot-voter label { font-size: 12px; color: var(--muted); margin-right: 4px; }
+.dot-btn { width: 20px; height: 20px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.1s; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: #fff; font-weight: 700; }
+.dot-btn:hover { transform: scale(1.2); }
+.dot-btn.green { background: #3a7d44; border-color: #2d6135; }
+.dot-btn.yellow { background: #e6ac2b; border-color: #c4920a; }
+.dot-btn.red { background: #b33a3a; border-color: #8a2a2a; }
+.dot-display { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; min-width: 60px; }
+.dot-display .dot { width: 16px; height: 16px; }
+.dot-voter-sep { color: var(--border); margin: 0 4px; }
+
+/* TASKS */
+.priority-body { display: none; padding: 0; }
+.priority-block.open .priority-body { display: block; }
+
+.task-group-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gold); font-weight: 700; padding: 12px 20px 4px; }
+
+.task-row { display: grid; grid-template-columns: 1fr 140px 140px 100px; gap: 10px; align-items: start; padding: 10px 20px; border-top: 1px solid var(--border); font-size: 13px; }
+.task-row:hover { background: var(--bg); }
+.task-text { color: var(--dark); display: flex; align-items: flex-start; gap: 8px; }
+.task-text input[type=checkbox] { margin-top: 3px; accent-color: var(--maroon); flex-shrink: 0; }
+.task-label { flex: 1; }
+.task-label.done-label { text-decoration: line-through; color: var(--muted); }
+.task-badge { font-size: 10px; background: var(--green-light); color: var(--green); border-radius: 99px; padding: 1px 7px; margin-left: 4px; white-space: nowrap; }
+.task-badge.pending { background: var(--yellow-light); color: var(--yellow); }
+.task-badge.blocked { background: var(--red-light); color: var(--red); }
+.task-badge.ongoing { background: var(--blue-light); color: var(--blue); }
+
+select.dept-select, select.status-select { font-family: Georgia, serif; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 4px 6px; background: var(--white); color: var(--dark); width: 100%; cursor: pointer; }
+select.dept-select:focus, select.status-select:focus { outline: 2px solid var(--gold); }
+
+.task-notes { width: 100%; font-family: Georgia, serif; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 4px 6px; resize: vertical; min-height: 30px; color: var(--mid); background: var(--white); }
+.task-notes:focus { outline: 2px solid var(--gold); }
+
+.add-task-row { padding: 10px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
+.add-task-input { flex: 1; font-family: Georgia, serif; font-size: 13px; border: 1px dashed var(--border); border-radius: 4px; padding: 6px 10px; color: var(--dark); background: var(--bg); }
+.add-task-input:focus { outline: 2px solid var(--gold); border-style: solid; background: var(--white); }
+.add-task-btn { background: var(--maroon); color: #fff; border: none; border-radius: 4px; padding: 6px 14px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; }
+.add-task-btn:hover { background: #5a1f2c; }
+
 /* Q&A */
-.qa-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
-.qa-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; display: block; }
-.qa-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
-.qa-empty { font-size: 12px; color: var(--muted); font-style: italic; padding: 2px 0 8px; }
-.qa-item { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); overflow: hidden; }
-.qa-item.resolved { border-color: var(--green); background: #f0faf2; }
-.qa-header { display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; }
-.qa-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
-.qa-item.resolved .qa-dot { background: var(--green); }
-.qa-body { flex: 1; }
-.qa-q { font-size: 13px; color: var(--dark); font-weight: 600; }
-.qa-who { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.qa-actions { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
-.qa-btn { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 3px 8px; font-family: Georgia, serif; font-size: 11px; color: var(--muted); cursor: pointer; white-space: nowrap; }
-.qa-btn:hover { border-color: var(--blue); color: var(--blue); }
-.qa-resolve-btn { border-color: var(--green); color: var(--green); }
-.qa-resolve-btn:hover { background: var(--green-light); }
-.qa-item.resolved .qa-resolve-btn { background: var(--green); color: #fff; }
-.qa-del { background: none; border: none; color: var(--muted); font-size: 17px; cursor: pointer; padding: 0 2px; line-height: 1; }
-.qa-del:hover { color: var(--red); }
-.qa-answer-wrap { padding: 0 12px 10px 30px; display: none; }
-.qa-item.show-answer .qa-answer-wrap { display: block; }
-.qa-answer { width: 100%; border: 1px solid var(--green); border-radius: 6px; padding: 7px 10px; font-family: Georgia, serif; font-size: 12px; color: var(--dark); background: #fff; resize: vertical; min-height: 52px; }
-.qa-answer:focus { outline: none; border-color: var(--green-bright); }
-.add-qa-btn { background: none; border: 1.5px dashed var(--blue); border-radius: 6px; padding: 7px 14px; font-family: Georgia, serif; font-size: 12px; color: var(--blue); cursor: pointer; width: 100%; transition: background 0.15s; }
-.add-qa-btn:hover { background: var(--blue-light); }
-.qa-form { background: var(--blue-light); border: 1px solid #a0bce0; border-radius: 8px; padding: 12px; margin-top: 8px; display: none; }
-.qa-form.visible { display: block; }
-.qa-form input { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; font-family: Georgia, serif; font-size: 13px; background: var(--white); outline: none; margin-bottom: 8px; }
-.qa-form input:focus { border-color: var(--blue); }
-.qa-form-actions { display: flex; gap: 8px; justify-content: flex-end; }
-.qa-form-add { background: var(--maroon); color: #fff; border: none; border-radius: 6px; padding: 7px 18px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; }
-.qa-form-add:hover { background: #5a1f2c; }
-.qa-form-cancel { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; color: var(--muted); }
-/* NOTES */
-.notes-area { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-family: Georgia, serif; font-size: 13px; color: var(--dark); background: var(--bg); resize: vertical; min-height: 72px; margin-top: 8px; }
-.notes-area:focus { outline: none; border-color: var(--gold); }
-.notes-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 14px; display: block; }
-/* SESSIONS */
-.session-timeline { display: flex; flex-direction: column; margin: 20px 0; position: relative; padding-left: 32px; }
-.session-timeline::before { content: ""; position: absolute; left: 10px; top: 12px; bottom: 12px; width: 2px; background: var(--border); }
-.session-item { position: relative; padding: 14px 0 14px 16px; }
-.session-dot { position: absolute; left: -26px; top: 18px; width: 14px; height: 14px; border-radius: 50%; background: var(--maroon); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--maroon); }
-.session-dot.tbd { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
-.session-label { font-size: 13px; font-weight: 700; color: var(--maroon); }
-.session-who { font-size: 12px; color: var(--muted); margin: 2px 0; }
-.session-date-input { font-size: 13px; color: var(--dark); font-family: Georgia, serif; border: none; border-bottom: 1.5px dashed var(--gold); background: transparent; outline: none; width: 180px; }
-.session-structured { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.session-field label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); display: block; margin-bottom: 4px; }
-.session-field textarea { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-family: Georgia, serif; font-size: 12px; color: var(--dark); background: var(--bg); resize: vertical; min-height: 64px; }
-.session-field textarea:focus { outline: none; border-color: var(--gold); }
-.session-field.full { grid-column: 1 / -1; }
-/* MILESTONES */
-.milestone-period { font-size: 13px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.milestone-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.milestone-check { flex-shrink: 0; margin-top: 3px; }
-.milestone-check input[type="checkbox"] { width: 17px; height: 17px; cursor: pointer; accent-color: var(--green); }
-.milestone-text { flex: 1; min-width: 0; }
-.milestone-text .m-title { font-size: 14px; color: var(--dark); }
-.milestone-text .m-title.done { text-decoration: line-through; color: var(--muted); }
-.milestone-text .m-sub { font-size: 12px; color: var(--muted); margin-top: 2px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.milestone-controls { display: flex; gap: 6px; align-items: flex-start; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-select.owner-select, select.status-select, select.session-select { border: 1px solid var(--border); border-radius: 6px; padding: 4px 7px; font-size: 11px; font-family: Georgia, serif; background: var(--white); color: var(--dark); cursor: pointer; }
-select.status-select.s-complete { background: var(--green-light); color: var(--green); border-color: var(--green); }
-select.status-select.s-inprogress { background: var(--yellow-light); color: #7a6000; border-color: #c8a800; }
-select.status-select.s-blocked { background: var(--red-light); color: var(--red); border-color: var(--red); }
-select.status-select.s-notstarted { background: var(--white); color: var(--muted); }
-.blocked-note-wrap { padding: 6px 0 8px 27px; display: none; }
-.blocked-note-wrap.visible { display: block; }
-.blocked-note { width: 100%; border: 1px solid var(--red); border-radius: 6px; padding: 7px 10px; font-family: Georgia, serif; font-size: 12px; color: var(--dark); background: var(--red-light); resize: vertical; min-height: 48px; }
-.blocked-note:focus { outline: none; }
-.blocked-note::placeholder { color: #c47a7a; }
-.session-tag { font-size: 10px; background: var(--maroon-light); color: var(--maroon); padding: 1px 7px; border-radius: 99px; }
-.add-task-btn { background: none; border: 1.5px dashed var(--gold); border-radius: 6px; padding: 7px 14px; font-family: Georgia, serif; font-size: 12px; color: var(--gold); cursor: pointer; margin-top: 10px; width: 100%; transition: background 0.15s; }
-.add-task-btn:hover { background: var(--gold-light); }
-.custom-task-form { background: var(--gold-light); border: 1px solid var(--gold); border-radius: 8px; padding: 14px; margin-top: 8px; display: none; }
-.custom-task-form.visible { display: block; }
-.custom-task-form input[type="text"] { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; font-family: Georgia, serif; font-size: 13px; background: var(--white); outline: none; margin-bottom: 8px; }
-.custom-task-form input:focus { border-color: var(--gold); }
-.form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-.form-row select { flex: 1; min-width: 120px; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-family: Georgia, serif; font-size: 12px; background: var(--white); }
-.form-actions { display: flex; gap: 8px; justify-content: flex-end; }
-.btn-add { background: var(--maroon); color: #fff; border: none; border-radius: 6px; padding: 7px 18px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; }
-.btn-add:hover { background: #5a1f2c; }
-.btn-cancel { background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; color: var(--muted); }
-.delete-task { background: none; border: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 0 4px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
-.delete-task:hover { color: var(--red); }
-/* SUCCESS */
-.success-list { list-style: none; padding: 0; margin-bottom: 20px; }
-.success-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-.success-item:last-child { border-bottom: none; }
-.success-check input[type="checkbox"] { width: 17px; height: 17px; cursor: pointer; accent-color: var(--green); margin-top: 2px; }
-.success-text { flex: 1; font-size: 14px; color: var(--mid); }
-.success-text.done { text-decoration: line-through; color: var(--muted); }
-.success-feedback { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; font-family: Georgia, serif; font-size: 12px; color: var(--dark); background: var(--bg); resize: vertical; min-height: 52px; margin-top: 6px; }
-.success-feedback:focus { outline: none; border-color: var(--gold); }
-.add-success-btn { background: none; border: 1.5px dashed var(--green-bright); border-radius: 6px; padding: 7px 14px; font-family: Georgia, serif; font-size: 12px; color: var(--green-bright); cursor: pointer; margin-top: 8px; width: 100%; }
-.add-success-btn:hover { background: var(--green-light); }
-.print-bar { background: var(--white); border-top: 1px solid var(--border); padding: 12px 32px; position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; gap: 12px; z-index: 100; }
-.print-btn { background: var(--maroon); color: #fff; border: none; border-radius: 6px; padding: 8px 20px; font-family: Georgia, serif; font-size: 13px; cursor: pointer; }
-.print-btn:hover { background: #5a1f2c; }
-.print-hint { font-size: 12px; color: var(--muted); }
-@media print {
-  .top-bar, nav, .print-bar, .add-task-btn, .custom-task-form, .add-success-btn, .delete-task, .add-qa-btn, .qa-form, .dot-add-btn { display: none !important; }
-  .section { display: block !important; } .priority-body { display: block !important; }
-  body { background: white; font-size: 12px; } .content { padding: 0; max-width: 100%; }
-}
-@media (max-width: 600px) {
-  .content { padding: 16px 12px 72px; } .built-section { grid-template-columns: 1fr; }
-  .session-structured { grid-template-columns: 1fr; } .top-bar { padding: 10px 14px; }
-  nav { padding: 0 6px; } nav button { padding: 10px 8px; font-size: 11px; }
-  .milestone-controls { flex-direction: column; }
+.qa-section { border-top: 2px solid var(--gold-light); padding: 14px 20px; background: var(--gold-light); }
+.qa-section h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 10px; font-weight: 700; }
+.qa-item { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; }
+.qa-item .qa-q { font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.qa-item .qa-meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.qa-item .qa-answer { color: var(--mid); font-style: italic; padding-top: 6px; border-top: 1px solid var(--border); margin-top: 6px; }
+.qa-item.resolved { border-left: 3px solid var(--green); }
+.qa-add { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.qa-add input { flex: 1; min-width: 140px; font-family: Georgia, serif; font-size: 12px; border: 1px dashed var(--border); border-radius: 4px; padding: 5px 8px; background: var(--white); }
+.qa-add input:focus { outline: 2px solid var(--gold); border-style: solid; }
+.qa-add button { background: var(--gold); color: #fff; border: none; border-radius: 4px; padding: 5px 12px; font-family: Georgia, serif; font-size: 12px; cursor: pointer; }
+
+/* LISTENING LOG */
+.log-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+.log-card h4 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.log-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.log-meta span { font-size: 12px; color: var(--muted); }
+.log-meta strong { color: var(--dark); }
+.log-field { margin-bottom: 10px; }
+.log-field label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.log-field textarea { width: 100%; font-family: Georgia, serif; font-size: 13px; border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; resize: vertical; min-height: 50px; color: var(--dark); }
+.log-field textarea:focus { outline: 2px solid var(--gold); }
+.add-log-btn { background: var(--maroon); color: #fff; border: none; border-radius: 6px; padding: 10px 20px; font-family: Georgia, serif; font-size: 14px; cursor: pointer; margin-bottom: 20px; }
+.add-log-btn:hover { background: #5a1f2c; }
+.group-chip { display: inline-block; font-size: 11px; padding: 2px 10px; border-radius: 99px; font-weight: 700; margin-left: 8px; }
+.chip-copresenter { background: #e8eef8; color: #2a5fa5; }
+.chip-collaborator { background: #eaf3ec; color: #3a7d44; }
+.chip-community { background: #fdf5e6; color: #C4973A; }
+
+/* SESSION LOG */
+.session-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; }
+.session-card h4 { font-size: 15px; font-weight: 700; color: var(--maroon); margin-bottom: 8px; }
+.session-date { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.session-field { margin-bottom: 10px; }
+.session-field label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.session-field textarea, .session-field input[type=text] { width: 100%; font-family: Georgia, serif; font-size: 13px; border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; color: var(--dark); }
+.session-field textarea { resize: vertical; min-height: 60px; }
+.session-field textarea:focus, .session-field input:focus { outline: 2px solid var(--gold); }
+
+/* PARKING LOT */
+.parking-item { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 6px; padding: 14px 16px; margin-bottom: 12px; }
+.parking-item h5 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.parking-item p { font-size: 13px; color: var(--mid); margin: 0; }
+.parking-item .parking-meta { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.parking-resolved { border-left-color: var(--green); opacity: 0.6; }
+
+/* CHANGE LOG */
+.change-item { background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-bottom: 10px; display: flex; gap: 16px; }
+.change-date { font-size: 12px; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 80px; }
+.change-desc { font-size: 13px; color: var(--dark); }
+
+/* UTILITY */
+.btn-sm { font-family: Georgia, serif; font-size: 12px; border: 1px solid var(--border); border-radius: 4px; padding: 4px 10px; cursor: pointer; background: var(--white); color: var(--mid); }
+.btn-sm:hover { border-color: var(--maroon); color: var(--maroon); }
+.mt { margin-top: 20px; }
+.flex-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; background: var(--maroon-light); color: var(--maroon); font-weight: 700; margin-left: 6px; }
+
+@media (max-width: 640px) {
+  .task-row { grid-template-columns: 1fr; }
+  .top-bar { padding: 12px 16px; }
+  nav { padding: 0 8px; }
+  .content { padding: 20px 12px 60px; }
 }
 </style>
 </head>
 <body>
+
 <div class="top-bar">
-  <h1>Wright Opera House — Strategic Plan 2026–2028</h1>
-  <span>Internal Planning Document</span>
+  <h1>Wright Opera House — Strategic Plan Tracker</h1>
+  <span>2026 · Living Document</span>
 </div>
-<nav id="main-nav">
-  <button class="active" onclick="showTab('overview',this)">Overview</button>
-  <button onclick="showTab('sessions',this)">Sessions</button>
-  <button onclick="showTab('priorities',this)">Priorities</button>
-  <button onclick="showTab('milestones',this)">Milestones</button>
-  <button onclick="showTab('success',this)">Success</button>
+
+<nav>
+  <button class="active" onclick="showTab('dashboard')">📊 Dashboard</button>
+  <button onclick="showTab('tasks')">✅ Tasks by Priority</button>
+  <button onclick="showTab('listening')">👂 Listening Log</button>
+  <button onclick="showTab('sessions')">📋 Session Log</button>
+  <button onclick="showTab('parking')">🅿️ Parking Lot</button>
+  <button onclick="showTab('changelog')">📝 Change Log</button>
 </nav>
+
 <div class="content">
 
-<!-- OVERVIEW -->
-<div class="section active" id="tab-overview">
-  <h2>Strategic Overview</h2>
-  <p class="subtitle">Foundation before revenue. Revenue before growth. The order matters because each one builds for the next.</p>
-  <div class="overall-progress">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <strong style="font-size:14px;">Overall milestone progress</strong>
-      <span class="pct-label"><span id="overall-pct">0</span>% complete</span>
-    </div>
-    <div class="progress-bar-wrap"><div class="progress-bar" id="overall-bar" style="width:0%"></div></div>
-  </div>
-  <div class="overview-grid">
-    <div class="stat-card"><input class="stat-edit" id="stat-events" value="127" onchange="saveStat('events',this.value)"><div class="stat-label">Events in 2026</div></div>
-    <div class="stat-card"><input class="stat-edit" id="stat-donors" value="7" onchange="saveStat('donors',this.value)"><div class="stat-label">Active major donors</div></div>
-    <div class="stat-card"><input class="stat-edit" id="stat-grants" value="$15K" onchange="saveStat('grants',this.value)"><div class="stat-label">Grants awarded 2026</div></div>
-    <div class="stat-card"><input class="stat-edit" id="stat-pending" value="$40K" onchange="saveStat('pending',this.value)"><div class="stat-label">Grants pending</div></div>
-    <div class="stat-card"><input class="stat-edit" id="stat-reserve" value="$0" onchange="saveStat('reserve',this.value)"><div class="stat-label">Operating reserve</div></div>
-    <div class="stat-card"><input class="stat-edit" id="stat-weddings" value="5" onchange="saveStat('weddings',this.value)"><div class="stat-label">Weddings booked 2026</div></div>
-  </div>
-  <h3>Our Vision</h3>
-  <p style="font-style:italic;color:var(--dark);font-size:15px;border-left:3px solid var(--gold);padding-left:14px;margin:0 0 20px;">The Wright Opera House is the enduring cultural heart of Ouray, where history is preserved, creativity thrives, and community comes together for generations.</p>
-  <h3>What We've Built Together</h3>
-  <p style="font-size:13px;color:var(--muted);">Items marked <span class="asterisk">★</span> were identified as needs in our 2021 and 2023 planning sessions.</p>
-  <div class="built-section">
-    <div class="built-card"><h4>Operations &amp; Staffing</h4><ul>
-      <li>Reorganized workspace so people can actually find things <span class="asterisk">★</span></li>
-      <li>Six operational policies documented</li>
-      <li>Document of Truth — no more crossed wires</li>
-      <li>Kate is no longer doing seventeen jobs <span class="asterisk">★</span></li>
-      <li>Volunteer training, oversight, scheduling <span class="asterisk">★</span></li>
-    </ul></div>
-    <div class="built-card"><h4>Marketing &amp; Communications</h4><ul>
-      <li>Redesigned website — easier tickets, ADA compliant <span class="asterisk">★</span></li>
-      <li>Dedicated wedding website, 2–3 click experience</li>
-      <li>Growing social media — thanks, Jacob! <span class="asterisk">★</span></li>
-    </ul></div>
-    <div class="built-card"><h4>Programming</h4><ul>
-      <li>Full one-year advance programming plan</li>
-      <li>Roller Disco, aerial silks, Pride events, music <span class="asterisk">★</span></li>
-      <li>Program evaluation process built</li>
-      <li>Film Fest: profitable, year 7, major recognition <span class="asterisk">★</span></li>
-    </ul></div>
-    <div class="built-card"><h4>Development &amp; Governance</h4><ul>
-      <li>$15K grants awarded, $40K pending</li>
-      <li>Membership program redesigned with real benefits</li>
-      <li>Sponsorship program built from scratch</li>
-      <li>Staff report + board president at weekly meetings</li>
-    </ul></div>
-  </div>
+<!-- ===== DASHBOARD ===== -->
+<div id="tab-dashboard" class="section active">
+  <h2>Dashboard</h2>
+  <p class="subtitle">At-a-glance progress across all 8 priorities. Updated monthly.</p>
+
+  <div class="phase-header">Phase 1 · Foundation & Credibility</div>
+  <div class="dash-grid" id="dash-grid-p1"></div>
+
+  <div class="phase-header">Phase 2 · Revenue & Stability</div>
+  <div class="dash-grid" id="dash-grid-p2"></div>
+
+  <div class="phase-header">Phase 3 · Growth & Continuity (Year 2+)</div>
+  <div class="dash-grid" id="dash-grid-p3"></div>
 </div>
 
-<!-- SESSIONS -->
-<div class="section" id="tab-sessions">
-  <h2>Planning Sessions</h2>
-  <p class="subtitle">Four sessions to roll out the plan. Full team alignment happens at Session 4 — team-dependent work begins after that.</p>
-  <div class="session-timeline">
-    <div class="session-item">
-      <div class="session-dot"></div>
-      <div class="session-label">Session 1 — ED &amp; Board</div>
-      <div class="session-who">Strategic plan review · Mission discussion · Priority confidence ratings · Milestone alignment</div>
-      <div style="font-weight:700;color:var(--maroon);font-size:13px;font-family:Georgia,serif;">June 6, 2026</div>
-      <div class="session-structured">
-        <div class="session-field"><label>Decisions made</label><textarea data-key="s1-decisions" placeholder="What was decided..."></textarea></div>
-        <div class="session-field"><label>Actions assigned</label><textarea data-key="s1-actions" placeholder="Who is doing what by when..."></textarea></div>
-        <div class="session-field full"><label>Parking lot</label><textarea data-key="s1-parking" placeholder="Good ideas that don't fit current priorities..."></textarea></div>
-        <div class="session-field full"><label>Notes</label><textarea data-key="s1-notes" placeholder="General session notes..."></textarea></div>
-      </div>
-    </div>
-    <div class="session-item">
-      <div class="session-dot tbd"></div>
-      <div class="session-label">Session 2 — ED &amp; Board</div>
-      <div class="session-who">Reserve policy · Donor concentration · Capital framework · Board-owned objectives</div>
-      <input class="session-date-input" type="text" data-key="s2-date" placeholder="Click to set date..." />
-      <div class="session-structured">
-        <div class="session-field"><label>Decisions made</label><textarea data-key="s2-decisions" placeholder="What was decided..."></textarea></div>
-        <div class="session-field"><label>Actions assigned</label><textarea data-key="s2-actions" placeholder="Who is doing what by when..."></textarea></div>
-        <div class="session-field full"><label>Parking lot</label><textarea data-key="s2-parking" placeholder="Good ideas that don't fit current priorities..."></textarea></div>
-        <div class="session-field full"><label>Notes</label><textarea data-key="s2-notes" placeholder="General session notes..."></textarea></div>
-      </div>
-    </div>
-    <div class="session-item">
-      <div class="session-dot tbd"></div>
-      <div class="session-label">Session 3 — ED &amp; Staff</div>
-      <div class="session-who">Operational priorities · Program evaluation · Communications cadence · Staff-owned objectives</div>
-      <input class="session-date-input" type="text" data-key="s3-date" placeholder="Click to set date..." />
-      <div class="session-structured">
-        <div class="session-field"><label>Decisions made</label><textarea data-key="s3-decisions" placeholder="What was decided..."></textarea></div>
-        <div class="session-field"><label>Actions assigned</label><textarea data-key="s3-actions" placeholder="Who is doing what by when..."></textarea></div>
-        <div class="session-field full"><label>Parking lot</label><textarea data-key="s3-parking" placeholder="Good ideas that don't fit current priorities..."></textarea></div>
-        <div class="session-field full"><label>Notes</label><textarea data-key="s3-notes" placeholder="General session notes..."></textarea></div>
-      </div>
-    </div>
-    <div class="session-item">
-      <div class="session-dot tbd"></div>
-      <div class="session-label">Session 4 — Full Team</div>
-      <div class="session-who">Board · ED · Staff — Unified plan, shared ownership. Team-dependent work begins after this session.</div>
-      <input class="session-date-input" type="text" data-key="s4-date" placeholder="Click to set date..." />
-      <div class="session-structured">
-        <div class="session-field"><label>Decisions made</label><textarea data-key="s4-decisions" placeholder="What was decided..."></textarea></div>
-        <div class="session-field"><label>Actions assigned</label><textarea data-key="s4-actions" placeholder="Who is doing what by when..."></textarea></div>
-        <div class="session-field full"><label>Parking lot</label><textarea data-key="s4-parking" placeholder="Good ideas that don't fit current priorities..."></textarea></div>
-        <div class="session-field full"><label>Notes</label><textarea data-key="s4-notes" placeholder="General session notes..."></textarea></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PRIORITIES -->
-<div class="section" id="tab-priorities">
-  <h2>The Eight Priorities</h2>
-  <p class="subtitle">Click + to add colored dots — just like the sticky dots on your flipchart. Click any dot to remove it. Log questions and track answers below each priority.</p>
+<!-- ===== TASKS ===== -->
+<div id="tab-tasks" class="section">
+  <h2>Tasks by Priority</h2>
+  <p class="subtitle">Every task, who owns it, its status, and notes. Updated monthly. Click any priority to expand.</p>
   <div id="priorities-container"></div>
 </div>
 
-<!-- MILESTONES -->
-<div class="section" id="tab-milestones">
-  <h2>Milestones</h2>
-  <p class="subtitle">Check off milestones, set owners and status, add tasks from sessions. Everything saves automatically.</p>
-  <div class="overall-progress">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <strong style="font-size:14px;">Progress</strong>
-      <span class="pct-label"><span id="m-pct">0</span>% complete</span>
-    </div>
-    <div class="progress-bar-wrap"><div class="progress-bar" id="m-bar" style="width:0%"></div></div>
-  </div>
-  <div id="milestone-list"></div>
+<!-- ===== LISTENING LOG ===== -->
+<div id="tab-listening" class="section">
+  <h2>Listening Log</h2>
+  <p class="subtitle">Document what you learn from each community listening session. Used to inform programming, partnerships, and mission decisions.</p>
+  <button class="add-log-btn" onclick="addListeningEntry()">+ Log a Session</button>
+  <div id="listening-entries"></div>
 </div>
 
-<!-- SUCCESS -->
-<div class="section" id="tab-success">
-  <h2>What Success Looks Like in 2026</h2>
-  <p class="subtitle">This is the starting list — add board input, check items off as the year unfolds.</p>
-  <ul class="success-list" id="success-list"></ul>
-  <button class="add-success-btn" onclick="addSuccessItem()">+ Add board input or new success marker</button>
-  <span class="notes-label">Year-end reflections</span>
-  <textarea class="notes-area" data-key="yearend-notes" placeholder="What we learned, what to carry into 2027..." style="min-height:100px;"></textarea>
+<!-- ===== SESSION LOG ===== -->
+<div id="tab-sessions" class="section">
+  <h2>Session Log</h2>
+  <p class="subtitle">Decisions, assignments, and outputs from each planning session.</p>
+  <button class="add-log-btn" onclick="addSessionEntry()">+ Log a Session</button>
+  <div id="session-entries"></div>
 </div>
 
+<!-- ===== PARKING LOT ===== -->
+<div id="tab-parking" class="section">
+  <h2>Parking Lot</h2>
+  <p class="subtitle">Items identified but not yet ready to task out. Revisit regularly.</p>
+  <div id="parking-items"></div>
 </div>
-<div class="print-bar">
-  <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
-  <span class="print-hint">Opens print dialog — choose "Save as PDF" to export</span>
+
+<!-- ===== CHANGE LOG ===== -->
+<div id="tab-changelog" class="section">
+  <h2>Change Log</h2>
+  <p class="subtitle">A record of structural changes to the strategic plan and tracker.</p>
+  <button class="add-log-btn" onclick="addChangeEntry()">+ Add Entry</button>
+  <div id="change-items"></div>
 </div>
+
+</div><!-- /content -->
 
 <script>
-const OWNERS = ['TBD','ED','Board','Board President','Treasurer','ED + Board','ED + Treasurer','ED + Staff','Staff','Full Team'];
-const SESSIONS = ['—','Session 1','Session 2','Session 3','Session 4'];
+// =====================
+// DATA
+// =====================
+
+const DEPTS = ['—', 'ED', 'Operations', 'Events & Programming', 'Marketing', 'Finances', 'Board', 'ED + Board', 'ED + Marketing'];
+const STATUSES = ['Not Yet', 'In Progress', 'Done ✓', 'Ongoing', 'Blocked', 'Pending', 'TBD'];
+
+const PHASES = [
+  { id: 'p1', label: 'Phase 1 · Foundation & Credibility' },
+  { id: 'p2', label: 'Phase 2 · Revenue & Stability' },
+  { id: 'p3', label: 'Phase 3 · Growth & Continuity (Year 2+)' },
+];
 
 const PRIORITIES = [
-  { id:'p1', num:1, phase:1, title:'Mission Alignment & Organizational Clarity',
-    desc:'Our community has watched The Wright grow from a beautiful venue into a producing organization. The space once created to hold the visions of others is now generating its own. Internal alignment around our evolved function — and ensuring our mission reflects that — is what makes every other priority on this list possible.',
-    timeline:'June 6: Board discussion · Mid-June: Vote & adoption', deliverable:'Agreed-upon mission statement, vision, and strategic direction', owner:'Board + ED' },
-  { id:'p2', num:2, phase:1, title:'Community Listening & Strategic Partnership',
-    desc:'Our community has the answers. This listening tour gathers and documents them — to understand what we do well, where we can improve, and where youth engagement fits into the work we\'re already doing. The insight deepens relationships, brings new opportunities to light, and directly informs our 2027 programming strategy.',
-    timeline:'1–4 months', deliverable:'15–20 documented conversations · 2–3 partnership MOUs or letters of intent', owner:'ED + Board' },
-  { id:'p3', num:3, phase:1, title:'Community Accountability & Open Communication',
-    desc:'Community updates are already live. This priority formalizes the standard and cadence — so our communications rhythm is consistent and reliable through email, social, and our community calendar. That reliability converts neighbors into patrons, and patrons into members and donors.',
-    timeline:'Cadence formalized by July · Annual State of the Wright: November', deliverable:'Formalized communications cadence · Annual State of the Wright event', owner:'ED' },
-  { id:'p4', num:4, phase:2, title:'Donor Relationships & Major Gift Development',
-    desc:'Two sequential parts: first, identify the specific projects and needs we want to raise funding for — each with a plain dollar ask. Then, with that clarity in place, approach donors with something specific and compelling. This is our primary path toward addressing funding needs and building sustaining relationships.',
-    timeline:'Months 4–12 from plan implementation (after Session 4)', deliverable:'Defined funding priorities · Donor prospect list · Major gift conversations initiated', owner:'ED + Board' },
-  { id:'p5', num:5, phase:2, title:'Financial Stability & Long-Term Planning',
-    desc:'Four focus areas: short-term rental of the Green Room ($10,000 goal), expanding our major donor base, building an operating reserve, and exploring a partnership with a local foundation for endowment management. We know where we stand. Now we build.',
-    timeline:'6–12 months', deliverable:'3-year financial model · Reserve policy adopted · Endowment decision made · STR revenue documented', owner:'Treasurer + ED + Board' },
-  { id:'p6', num:6, phase:2, title:'Youth Engagement Integration',
-    desc:'The student film fest worked. Now we\'re identifying natural collaborations with current artists as the next phase. In September 2026 we\'ll identify additional collaboration opportunities to give us more runway before March 2027 planning shapes the 2028 season.',
-    timeline:'2026 pilots · Sept 2026: ID 2027 collabs · March 2027: Programming planning', deliverable:'Documented pilot outcomes · 2027 collaboration opportunities identified', owner:'ED' },
-  { id:'p7', num:7, phase:2, title:'Operational Excellence & Program Evaluation',
-    desc:'Strong operations and high-quality programming speaks for itself. This priority formalizes what\'s working and builds systems for smart decisions going forward — key policies and a program validation structure that tells us which programs to grow, revise, or retire.',
-    timeline:'6–12 months', deliverable:'Adopted organizational policies · Program validation framework with documented criteria', owner:'ED + Staff' },
-  { id:'p8', num:8, phase:2, title:'Capital Project Governance',
-    desc:'The Mesker Front restoration is teaching us something important: we don\'t yet have a shared framework for how capital projects are identified, funded, and executed. We use Mesker to build the framework so every project that follows has a defined process from the start.',
-    timeline:'Framework developed by September · Board adoption by October', deliverable:'Capital project governance framework adopted by board', owner:'ED + Board' },
-];
-
-const PHASE_LABELS = { 1: { tag:'Phase 1', title:'Foundation & Credibility', months:'Months 1–6' }, 2: { tag:'Phase 2', title:'Revenue & Stability', months:'Months 4–12' } };
-
-const DEFAULT_MILESTONES = [
-  { period:"June–July 2026", items:[
-    {id:"m1",text:"Session 1: ED & Board strategic plan review",timing:"June 6",owner:"ED + Board"},
-    {id:"m2",text:"Board discussion: does our mission still fit?",timing:"June 6",owner:"Board"},
-    {id:"m3",text:"Mission vote complete",timing:"Mid-June",owner:"Board"},
-    {id:"m4",text:"Confirm Mesker project leadership transition to ED",timing:"June–July",owner:"ED + Board"},
-    {id:"m5",text:"Knowledge transfer from departing board member on Mesker",timing:"Before June 30",owner:"Board"},
-    {id:"m6",text:"Schedule meeting with Ouray County Community Fund",timing:"June–July",owner:"ED"},
-    {id:"m7",text:"Treasurer and ED begin donor concentration analysis",timing:"June–July",owner:"ED + Treasurer"},
-    {id:"m8",text:"Finalize second music booking for 2026",timing:"June–July",owner:"ED"},
-    {id:"m9",text:"Identify listening tour partner list with board input",timing:"June–July",owner:"ED + Board"},
-    {id:"m10",text:"Communications cadence and standard formalized",timing:"July",owner:"ED"},
-    {id:"m11",text:"Begin personal donor outreach",timing:"July",owner:"ED + Board"},
-    {id:"m12",text:"Session 2: ED & Board",timing:"Date TBD",owner:"ED + Board"},
-  ]},
-  { period:"August–September 2026", items:[
-    {id:"m13",text:"All donor outreach completed",timing:"August",owner:"ED + Board"},
-    {id:"m14",text:"Partner listening tour launched (15–20 conversations)",timing:"August",owner:"ED"},
-    {id:"m15",text:"Ouray County Community Fund meeting completed",timing:"August",owner:"ED"},
-    {id:"m16",text:"Board presentation: donor concentration analysis + reserve policy",timing:"August",owner:"Treasurer + ED"},
-    {id:"m17",text:"Board adopts reserve policy with target and timeline",timing:"August",owner:"Board"},
-    {id:"m18",text:"Treasurer presents contingency line methodology",timing:"August",owner:"Treasurer"},
-    {id:"m19",text:"Music show #1 executed",timing:"Aug–Sept",owner:"ED"},
-    {id:"m20",text:"Membership program assessment completed",timing:"Aug–Sept",owner:"ED"},
-    {id:"m21",text:"Capital governance framework developed",timing:"September",owner:"ED + Board"},
-    {id:"m22",text:"Identify additional youth collaboration opportunities for 2027",timing:"September",owner:"ED"},
-    {id:"m23",text:"Session 3: ED & Staff",timing:"Date TBD",owner:"ED"},
-  ]},
-  { period:"October–November 2026", items:[
-    {id:"m24",text:"Board adopts budget contingency line as formal policy",timing:"October",owner:"Board"},
-    {id:"m25",text:"Capital governance framework adopted by board",timing:"October",owner:"Board"},
-    {id:"m26",text:"Gift acceptance policy drafted and adopted",timing:"October",owner:"ED + Board"},
-    {id:"m27",text:"Partner listening tour completed",timing:"October",owner:"ED"},
-    {id:"m28",text:"Music show #2 executed",timing:"October",owner:"ED"},
-    {id:"m29",text:"Wright Winter Roll Year 2 planning finalized",timing:"October",owner:"ED"},
-    {id:"m30",text:"State of the Wright planning underway",timing:"October",owner:"ED"},
-    {id:"m31",text:"Membership program refinements implemented",timing:"October",owner:"ED"},
-    {id:"m32",text:"Session 4: Full Team — Board, ED, Staff",timing:"Date TBD",owner:"Full Team"},
-    {id:"m33",text:"State of the Wright executed",timing:"November",owner:"ED + Board"},
-  ]},
-  { period:"November–December 2026", items:[
-    {id:"m34",text:"Wright Winter Roll Year 2 executed",timing:"Nov–Dec",owner:"ED"},
-    {id:"m35",text:"Listening tour synthesis report completed",timing:"December",owner:"ED"},
-    {id:"m36",text:"Youth pilot assessment completed; 2027 decisions made",timing:"December",owner:"ED"},
-    {id:"m37",text:"Music programming assessment; 2027 decision made",timing:"December",owner:"ED"},
-    {id:"m38",text:"2027 budget built with contingency line included",timing:"December",owner:"Treasurer + ED"},
-    {id:"m39",text:"Three-year financial model initiated",timing:"December",owner:"Treasurer + ED"},
-    {id:"m40",text:"2027 programming season planned and marketed",timing:"December",owner:"ED"},
-  ]},
-  { period:"Year 2 — 2027", items:[
-    {id:"m41",text:"Youth programming planning session",timing:"March 2027",owner:"ED"},
-    {id:"m42",text:"Structured youth programming strategy adopted (if pilots validate)",timing:"2027",owner:"ED + Board"},
-    {id:"m43",text:"Capital campaign feasibility study initiated",timing:"2027",owner:"ED + Board"},
-  ]},
-];
-
-const DEFAULT_SUCCESS = [
-  "Programming delivered consistently at a high standard — proving 2025 was not a fluke but a new baseline",
-  "Partner listening tour complete, documented, and already shaping 2027 planning",
-  "Every affected donor personally contacted and relationships actively being rebuilt",
-  "Youth engagement pilots documented with clear learnings captured",
-  "Financial sustainability roadmap in place with board-adopted reserve and contingency policies",
-  "Community perception of The Wright as welcoming and accessible is demonstrably improving",
-  "Mesker front restoration actively advancing with documented milestones",
-  "Music programming launched with two well-executed shows",
-  "Mission updated, voted on, and shared",
-  "Program evaluation framework fully implemented and actively being used",
-];
-
-const PRELOADED = {
-  milestones:{}, customTasks:{}, success:{}, customSuccess:[], stats:{},
-  dots:{
-    p1:['g','g','g','g','g','y'],
-    p2:['r','r','r','r','r','g','g'],
-    p3:['g','g','g','y','y','y','y','r'],
-    p4:['g','g','g','y','y','r','r','r'],
-    p5:['y','y','y','y','r','r','r','r','r'],
-    p6:['g','g','g','g','g','g','y','r'],
-    p7:['g','g','y','y','y','y','r','r','r'],
-    p8:['y','r','r','r','r','r','r']
-  },
-  qa:{
-    p1:[
-      {id:'qa-p1-1',question:'I agree with revisions to mission statement — unclear about vision and strategic direction',asker:'',answer:'',resolved:false}
+  {
+    id: 1, phase: 'p1',
+    name: 'Mission Alignment & Organizational Clarity',
+    note: 'Foundation for everything else. Already underway.',
+    tasks: [
+      { text: 'Initiate mission discussion', dept: 'ED', status: 'Done ✓', notes: 'Already begun' },
+      { text: 'Research comparative missions', dept: 'ED', status: 'Done ✓', notes: 'Already begun' },
+      { text: 'Draft revised mission statement', dept: 'ED', status: 'Done ✓', notes: 'Draft complete' },
+      { text: 'Review draft at July board meeting', dept: 'ED + Board', status: 'Not Yet', notes: '' },
+      { text: 'Board vote to approve', dept: 'Board', status: 'Not Yet', notes: '' },
+      { text: 'Draft announcement', dept: 'Marketing', status: 'Not Yet', notes: '' },
+      { text: 'Update mission across all platforms', dept: 'Marketing', status: 'Not Yet', notes: '' },
+      { text: 'Public announcement', dept: 'Marketing', status: 'Not Yet', notes: '' },
+      { text: 'Discuss mission update at Donor Dinner', dept: 'Events & Programming', status: 'Not Yet', notes: 'July 29th' },
+      { text: 'Feature mission update at State of the Wright', dept: 'ED + Marketing', status: 'Not Yet', notes: 'Date TBD' },
+      { text: 'Open each curtain speech with new mission statement', dept: 'Events & Programming', status: 'Ongoing', notes: 'Through 2026 season — ongoing practice' },
     ],
-    p2:[
-      {id:'qa-p2-1',question:"Don't know what this would entail — questions about management of endowment fund",asker:'Vivian',answer:'',resolved:false},
-      {id:'qa-p2-2',question:'Survey the community (Ouray and County) to identify what THEY want from the Wright',asker:'',answer:'',resolved:false},
-      {id:'qa-p2-3',question:'How far have we progressed in making people feel welcome at the Wright?',asker:'',answer:'',resolved:false},
-      {id:'qa-p2-4',question:'Looking for a clear way to facilitate tracking the data we gather',asker:'',answer:'',resolved:false},
-      {id:'qa-p2-5',question:'Is this only conversations with community partners (e.g. OCPAG)? Individual community members seem different',asker:'',answer:'',resolved:false},
-      {id:'qa-p2-6',question:'Create "community" of renters and lessees — promote and support',asker:'',answer:'',resolved:false}
-    ],
-    p3:[],
-    p4:[
-      {id:'qa-p4-1',question:'Need more detail on this priority',asker:'Vivian',answer:'',resolved:false},
-      {id:'qa-p4-2',question:'All monies contributed could go into one pool. The mission should sustain interest in that. Board can then decide priorities of expenditures.',asker:'',answer:'',resolved:false}
-    ],
-    p5:[
-      {id:'qa-p5-1',question:'Need to understand in more detail what staff would be proposing — I have questions about management of endowment fund. We are a long way before we have enough money to manage.',asker:'Vivian',answer:'',resolved:false},
-      {id:'qa-p5-2',question:'Green Room as short-term rental — how would this work?',asker:'',answer:'',resolved:false}
-    ],
-    p6:[
-      {id:'qa-p6-1',question:"I like the idea of more programming for youth — would have a lot of questions and concerns about structured youth programming in 2027",asker:'Vivian',answer:'',resolved:false},
-      {id:'qa-p6-2',question:"Are there other youth programs we're modeling? Is the school involved in our youth programming?",asker:'Lou',answer:'',resolved:false}
-    ],
-    p7:[
-      {id:'qa-p7-1',question:'Program evaluation is very different from employee issues — need to be careful not to alienate community. Agree to a process to review.',asker:'',answer:'',resolved:false},
-      {id:'qa-p7-2',question:'Concerns about retirement of traditional programs and operational strength',asker:'',answer:'',resolved:false}
-    ],
-    p8:[
-      {id:'qa-p8-1',question:'Not sure I agree with how this issue is posed',asker:'Vivian',answer:'',resolved:false},
-      {id:'qa-p8-2',question:'In capital projects do we need to weigh WOH over WND or vice versa, or at all?',asker:'Lou',answer:'',resolved:false}
+    qa: [
+      { q: 'Does the mission reevaluation need to go to the full community for input, or is board adoption sufficient?', by: '', answer: '', resolved: false }
     ]
   },
-  's1-notes':"What would make you feel like you are driving this:\nWhen do you want this strategic plan to take effect: (2) beginning of 3rd quarter, (2) beginning of 4th quarter, (2) in 3 months / 4-6 months will depend on how this develops, (1) beginning of 2027"
+  {
+    id: 2, phase: 'p1',
+    name: 'Community Listening & Strategic Partnership',
+    note: 'Three groups: co-presenters, community collaborators, community members.',
+    tasks: [
+      { text: 'Identify and schedule co-presenter coffee talks / meetings', dept: 'ED', status: 'Not Yet', notes: '' },
+      { text: 'Identify and schedule community collaborator meetings', dept: 'ED', status: 'Not Yet', notes: '' },
+      { text: 'Identify and schedule community member group sessions', dept: 'ED', status: 'Not Yet', notes: 'Sub-groups: parents, theater goers, movie buffs, students, etc.' },
+      { text: 'Conduct listening sessions', dept: 'ED', status: 'Ongoing', notes: 'Ongoing through 2026. Log each session in Listening Log tab.' },
+      { text: 'Document learnings after each session', dept: 'ED', status: 'Ongoing', notes: 'See Listening Log tab' },
+      { text: 'Synthesize findings — periodic review across all groups', dept: 'ED', status: 'Not Yet', notes: '' },
+    ],
+    qa: []
+  },
+  {
+    id: 3, phase: 'p1',
+    name: 'Community Accountability & Open Communication',
+    note: 'Trust built through consistent follow-through is the foundation for future asks.',
+    tasks: [
+      { text: 'Website friction audit & edits', dept: 'Marketing', status: 'Done ✓', notes: 'Reduced ticket sale and navigation friction' },
+      { text: 'Standardized social media calendar', dept: 'Marketing', status: 'Done ✓', notes: '' },
+      { text: 'Standardized email communications cadence', dept: 'Marketing', status: 'Done ✓', notes: 'Beyond events and volunteer comms' },
+      { text: 'Members only letter', dept: 'Marketing', status: 'Ongoing', notes: '' },
+      { text: 'Quarterly patron update', dept: 'Marketing', status: 'Ongoing', notes: '' },
+      { text: 'Board letter', dept: 'ED + Board', status: 'Ongoing', notes: '2x per year' },
+      { text: 'Patron support & sustainability messaging', dept: 'ED + Marketing', status: 'Ongoing', notes: 'Recognizing that sustainability is only possible with patron support' },
+      { text: 'Design and schedule State of the Wright', dept: 'ED', status: 'Not Yet', notes: 'Date TBD — community accountability event' },
+    ],
+    qa: []
+  },
+  {
+    id: 4, phase: 'p1',
+    name: 'Operational Excellence & Program Evaluation',
+    note: 'Formalizes what\'s working. Goal: build systems for smart decisions going forward.',
+    taskGroups: [
+      {
+        label: 'Program Evaluation Framework',
+        tasks: [
+          { text: 'Finalize program evaluation framework design', dept: 'ED', status: 'In Progress', notes: 'Designed by ED. Film Fest = grow; Theater = restructure (high audience, lower revenue)' },
+          { text: 'Present framework to board', dept: 'ED + Board', status: 'Not Yet', notes: 'With narrative on why defining this before relying on programming for revenue is critical' },
+          { text: 'Board adopts evaluation framework', dept: 'Board', status: 'Not Yet', notes: '' },
+          { text: 'Apply framework to current program inventory', dept: 'ED', status: 'Not Yet', notes: '' },
+          { text: 'Document findings — grow, revise, or retire recommendations', dept: 'ED', status: 'Not Yet', notes: '' },
+        ]
+      },
+      {
+        label: 'Policies',
+        tasks: [
+          { text: 'Gift acceptance policy — create and adopt', dept: 'ED + Board', status: 'Not Yet', notes: '' },
+          { text: 'Reserve policy — create and adopt', dept: 'ED + Board', status: 'Not Yet', notes: '' },
+          { text: 'Reserve policy — funding plan', dept: 'ED + Finances', status: 'Not Yet', notes: '' },
+          { text: 'Endowment policy — board discussion on direction', dept: 'Board', status: 'Not Yet', notes: '' },
+          { text: 'Endowment policy — update if board decides yes', dept: 'ED + Board', status: 'Blocked', notes: 'Contingent on board discussion outcome' },
+          { text: 'Procurement policy — establish to support donor confidence', dept: 'ED + Operations', status: 'Not Yet', notes: 'Ensures donors feel confident we seek best price on best service' },
+        ]
+      },
+      {
+        label: 'Systems',
+        tasks: [
+          { text: 'Build donor database', dept: 'ED + Operations', status: 'Not Yet', notes: 'Operational system supporting all donor relationship work' },
+        ]
+      }
+    ],
+    qa: [
+      { q: 'Board concern: more programming = more revenue. How do we address?', by: '', answer: 'We have just over twice as much programming this year as last year. The framework will demonstrate that volume doesn\'t automatically equal revenue.', resolved: false }
+    ]
+  },
+  {
+    id: 5, phase: 'p2',
+    name: 'Donor Relationships & Major Gift Development',
+    note: 'Two phases: define what we\'re asking for, then approach donors with something specific and compelling.',
+    taskGroups: [
+      {
+        label: 'Phase A — Identify & Define (before July 29)',
+        tasks: [
+          { text: 'Identify 2–3 fundable projects with plain dollar asks', dept: 'ED', status: 'Not Yet', notes: 'Must be complete before Donor Dinner July 29th' },
+          { text: 'Prepare donor dinner talking points around those asks', dept: 'ED + Marketing', status: 'Not Yet', notes: '' },
+        ]
+      },
+      {
+        label: 'Phase B — Donor Approach',
+        tasks: [
+          { text: 'Plan and execute Donor Dinner', dept: 'Events & Programming', status: 'Not Yet', notes: 'July 29th — 100 donors invited' },
+          { text: 'Identify and qualify major donor prospects', dept: 'ED', status: 'Not Yet', notes: '' },
+          { text: 'Personalized outreach to each donor', dept: 'ED', status: 'Ongoing', notes: '' },
+          { text: 'Document donor conversations and follow-up', dept: 'ED', status: 'Ongoing', notes: 'Use donor database (Priority 4)' },
+          { text: 'Steward existing donor relationships', dept: 'ED', status: 'Ongoing', notes: '' },
+          { text: 'Develop full fundable ask list beyond initial 2–3', dept: 'ED', status: 'Not Yet', notes: 'Continues after Donor Dinner' },
+        ]
+      }
+    ],
+    qa: []
+  },
+  {
+    id: 6, phase: 'p2',
+    name: 'Financial Stability & Long Term Planning',
+    note: 'Four focus areas: Green Room rental, operating reserve, endowment partnership, long-term planning.',
+    taskGroups: [
+      {
+        label: 'Green Room Rental ($10,000 goal)',
+        tasks: [
+          { text: 'Green Room short-term rental — strategy and execution', dept: 'ED + Operations', status: 'In Progress', notes: '$10,000 goal. Discovery to execution.' },
+        ]
+      },
+      {
+        label: 'Operating Reserve',
+        tasks: [
+          { text: 'Build operating reserve', dept: 'ED + Finances', status: 'Not Yet', notes: 'Follows reserve policy adoption (Priority 4)' },
+          { text: 'Contingency line in budget', dept: 'Finances', status: 'Not Yet', notes: '' },
+        ]
+      },
+      {
+        label: 'Foundation Partnership & Endowment',
+        tasks: [
+          { text: 'Meeting with Western Colorado Community Foundation', dept: 'ED', status: 'Done ✓', notes: 'WCCF meeting complete' },
+          { text: 'Explore foundation partnership for endowment management', dept: 'ED', status: 'In Progress', notes: 'Discussion ongoing — decision pending' },
+        ]
+      },
+      {
+        label: 'Long-Term Planning',
+        tasks: [
+          { text: 'Three-year financial model', dept: 'ED + Finances', status: 'Pending', notes: 'Recommended deliverable — decision pending board input' },
+          { text: 'Earned revenue from programming', dept: 'ED', status: 'Pending', notes: 'Pending program evaluation (Priority 4). Will revisit once eval complete.' },
+        ]
+      }
+    ],
+    qa: []
+  },
+  {
+    id: 7, phase: 'p2',
+    name: 'Youth Engagement Integration',
+    note: 'Spend 2026 identifying natural fits. Inform by listening. Shape 2028 programming.',
+    taskGroups: [
+      {
+        label: 'Existing Programs',
+        tasks: [
+          { text: 'Student Film Fest — continue and build on success', dept: 'Events & Programming', status: 'Ongoing', notes: 'Proven model. Continue.' },
+          { text: 'Follow up with Central City Opera', dept: 'ED', status: 'Not Yet', notes: 'Existing partner — field trip model. Haven\'t heard from them yet.' },
+          { text: 'Reach out to Ridgway and Ouray schools', dept: 'ED', status: 'Not Yet', notes: 'Re-engage for 2026' },
+        ]
+      },
+      {
+        label: 'Natural Collaborations',
+        tasks: [
+          { text: 'Identify natural artist collaborations for youth engagement', dept: 'ED', status: 'In Progress', notes: 'Ongoing 2026 — next phase after film fest success' },
+          { text: 'Conduct youth-focused listening sessions', dept: 'ED', status: 'Not Yet', notes: 'Connects to Priority 2 listening groups' },
+          { text: 'September 2026 — identify additional collaboration opportunities', dept: 'ED', status: 'Not Yet', notes: 'Runway before March 2027 planning shapes 2028 season' },
+        ]
+      },
+      {
+        label: 'Structured Youth Programming',
+        tasks: [
+          { text: 'Standardize workshop process with existing partners', dept: 'ED', status: 'Not Yet', notes: '' },
+          { text: 'Create procedures for structured youth programming', dept: 'ED + Operations', status: 'Not Yet', notes: 'Standardize what we already do' },
+          { text: 'Build data collection process', dept: 'ED', status: 'Not Yet', notes: 'To inform future self-produced programs' },
+        ]
+      },
+      {
+        label: '2028 Programming Pipeline',
+        tasks: [
+          { text: 'Source funding for Wright-produced 2028 youth programming', dept: 'ED', status: 'Not Yet', notes: 'Connects to Priority 5 donor work' },
+          { text: 'Shape 2028 youth programming recommendations', dept: 'ED', status: 'Not Yet', notes: 'Must inform March 2027 planning' },
+        ]
+      }
+    ],
+    qa: [
+      { q: 'Vivian: Are there other youth programs we\'re modeling?', by: 'Vivian', answer: 'We want to get to know our market first through listening before modeling after others. This is more rigorous, not less.', resolved: false },
+      { q: 'Is the school involved in our youth programming?', by: '', answer: 'Yes — coordinated field trip between Ridgway and Ouray school and Central City Opera last year. Re-engaging in 2026.', resolved: false }
+    ]
+  },
+  {
+    id: 8, phase: 'p3',
+    name: 'Capital Project Governance',
+    note: 'Phase 3. Creating infrastructure for how Wright makes and manages any major capital decision.',
+    tasks: [
+      { text: 'Identify advisors to help build capital project governance framework', dept: 'ED', status: 'Not Yet', notes: 'Reach out to peer organizations, board connections, consultants' },
+      { text: 'Initial conversations with advisors', dept: 'ED', status: 'Not Yet', notes: '' },
+      { text: 'Draft capital project governance framework', dept: 'ED', status: 'Not Yet', notes: 'Covers: proposal/evaluation process, decision authority, budget oversight, procurement, reporting, stop/pause triggers' },
+      { text: 'Present framework to board for adoption', dept: 'ED + Board', status: 'Not Yet', notes: '' },
+      { text: 'Confirm Mesker project leadership transition to ED', dept: 'ED', status: 'Not Yet', notes: 'By June 2026' },
+      { text: 'Complete knowledge transfer from departing board member — Mesker', dept: 'ED + Board', status: 'Not Yet', notes: 'Before June 2026' },
+      { text: 'Finalize total project cost estimate with Springboard Preservation Studio', dept: 'ED', status: 'Not Yet', notes: '' },
+      { text: 'Develop diversified funding strategy for Mesker', dept: 'ED', status: 'Not Yet', notes: 'Grants, individual donors, community partners' },
+      { text: 'Engage community in Mesker color selection process', dept: 'ED + Marketing', status: 'Not Yet', notes: '' },
+    ],
+    qa: []
+  },
+];
+
+const PARKING_LOT = [
+  { id: 1, title: 'Board narrative: programming volume vs. revenue reality', desc: 'Prepare presentation for board on why more programming doesn\'t automatically mean more revenue. We have twice as much programming this year as last year.', owner: 'ED', timing: 'TBD', resolved: false },
+  { id: 2, title: 'Expense management structure', desc: 'No one on the team currently has a good structure for this. We consistently underestimate budget and overspend. Requires outside expertise — consultant, fractional CFO, or board finance lead. Assess first, then build.', owner: 'TBD', timing: 'TBD', resolved: false },
+  { id: 3, title: 'Accountant relationship & financial process', desc: 'We have an accountant but the working relationship and process needs strengthening. ED to clarify what\'s needed from each side.', owner: 'ED', timing: 'TBD', resolved: false },
+  { id: 4, title: 'Grant pipeline', desc: 'Unresolved — grants can be significant revenue and tend to get lost without dedicated tracking. Revisit when capacity allows.', owner: 'TBD', timing: 'TBD', resolved: false },
+  { id: 5, title: 'Cash flow management', desc: 'Month-to-month visibility beyond annual budget. Revisit when capacity allows.', owner: 'TBD', timing: 'TBD', resolved: false },
+  { id: 6, title: 'Board education: what "structured youth programming" actually means', desc: 'There\'s a perception gap between what the board imagines and what we\'re actually proposing. Address proactively before it becomes resistance.', owner: 'ED', timing: 'Next board meeting', resolved: false },
+  { id: 7, title: 'Board narrative: youth program model research comes after market listening', desc: 'Address Vivian\'s question about other youth programs proactively. We\'re doing listening first — this is more rigorous, not less.', owner: 'ED', timing: 'Next board meeting', resolved: false },
+];
+
+const CHANGE_LOG = [
+  { date: 'June 2026', desc: 'Reordered priorities. Program Evaluation moved from Priority 7 to Priority 4 (Phase 1) to reflect its role as a prerequisite for revenue and programming decisions. All downstream priorities renumbered accordingly.' },
+  { date: 'June 2026', desc: 'Tracker structure established: Dashboard, Tasks by Priority, Listening Log, Session Log, Parking Lot, Change Log. Three-tab concept expanded to six for completeness.' },
+  { date: 'June 2026', desc: 'Board Development removed from priority list per ED decision. Not a 2026 tracked priority.' },
+  { date: 'June 2026', desc: 'Donor Relationships & Major Gift Development elevated to its own priority (Priority 5), separate from Financial Stability, reflecting its strategic importance and distinct work stream.' },
+];
+
+// =====================
+// STATE
+// =====================
+let state = {
+  tasks: {}, // priorityId -> array of task objects
+  dots: {}, // priorityId -> {green:[], yellow:[], red:[]}
+  qa: {}, // priorityId -> array
+  listening: [],
+  sessions: [],
 };
 
-function loadState(){
-  try {
-    const saved = JSON.parse(localStorage.getItem('wright-plan-v3')||'null');
-    if(saved && saved._initialized) return saved;
-    // First load — merge preloaded data
-    const merged = Object.assign({}, PRELOADED, saved||{});
-    merged._initialized = true;
-    localStorage.setItem('wright-plan-v3', JSON.stringify(merged));
-    return merged;
-  } catch(e){ return Object.assign({},PRELOADED,{_initialized:true}); }
-}
-function saveState(){try{localStorage.setItem('wright-plan-v3',JSON.stringify(state))}catch(e){}}
-let state=loadState();
-if(!state.milestones)state.milestones={};
-if(!state.customTasks)state.customTasks={};
-if(!state.success)state.success={};
-if(!state.customSuccess)state.customSuccess=[];
-if(!state.stats)state.stats={};
-if(!state.dots)state.dots={};
-if(!state.qa)state.qa={};
-
-function showTab(name,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('#main-nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  btn.classList.add('active');
-}
-
-function togglePriority(id){document.getElementById(id).classList.toggle('open')}
-
-// ---- PRIORITIES RENDER ----
-function buildPriorities(){
-  const container=document.getElementById('priorities-container');
-  let lastPhase=0;
-  PRIORITIES.forEach(p=>{
-    if(p.phase!==lastPhase){
-      const ph=PHASE_LABELS[p.phase];
-      const phDiv=document.createElement('div');
-      phDiv.className='phase-header';
-      phDiv.innerHTML=`<span class="phase-tag">${ph.tag}</span><span class="phase-title">${ph.title}</span><span class="phase-months">${ph.months}</span>`;
-      container.appendChild(phDiv);
-      lastPhase=p.phase;
+function initState() {
+  PRIORITIES.forEach(p => {
+    // Flatten tasks
+    let tasks = [];
+    if (p.tasks) tasks = p.tasks.map((t,i) => ({...t, id: i, group: null}));
+    if (p.taskGroups) {
+      p.taskGroups.forEach(g => {
+        g.tasks.forEach((t,i) => tasks.push({...t, id: tasks.length, group: g.label}));
+      });
     }
-    const card=document.createElement('div');
-    card.className='priority-card';
-    card.id=p.id;
-    card.innerHTML=`
-      <div class="priority-header" onclick="togglePriority('${p.id}')">
-        <div class="priority-num">${p.num}</div>
-        <div class="priority-title">${p.title}</div>
-        <div class="priority-meta" id="${p.id}-summary"></div>
-        <div class="chevron">▼</div>
+    state.tasks[p.id] = tasks;
+    state.dots[p.id] = { green: [], yellow: [], red: [] };
+    state.qa[p.id] = (p.qa || []).map((q,i) => ({...q, id: i}));
+  });
+}
+
+// =====================
+// TABS
+// =====================
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'dashboard') renderDashboard();
+}
+
+// =====================
+// DASHBOARD
+// =====================
+function renderDashboard() {
+  ['p1','p2','p3'].forEach(phase => {
+    const grid = document.getElementById('dash-grid-' + phase);
+    grid.innerHTML = '';
+    PRIORITIES.filter(p => p.phase === phase).forEach(p => {
+      const tasks = state.tasks[p.id];
+      const total = tasks.length;
+      const done = tasks.filter(t => t.status === 'Done ✓').length;
+      const inProg = tasks.filter(t => t.status === 'In Progress' || t.status === 'Ongoing').length;
+      const pct = total > 0 ? Math.round(((done + inProg * 0.5) / total) * 100) : 0;
+      const dots = state.dots[p.id];
+      const allDots = [
+        ...dots.green.map(() => 'green'),
+        ...dots.yellow.map(() => 'yellow'),
+        ...dots.red.map(() => 'red'),
+      ];
+
+      const card = document.createElement('div');
+      card.className = 'dash-card';
+      card.innerHTML = `
+        <div class="phase-label">Priority ${p.id}</div>
+        <h4>${p.name}</h4>
+        <div class="progress-wrap">
+          <div class="progress-fill ${pct === 100 ? 'done' : ''}" style="width:${pct}%"></div>
+        </div>
+        <div class="pct">${done}/${total} tasks complete · ${pct}%</div>
+        ${allDots.length > 0 ? `<div class="dot-summary">${allDots.map(c => `<span class="dot ${c}"></span>`).join('')}</div>` : ''}
+      `;
+      grid.appendChild(card);
+    });
+  });
+}
+
+// =====================
+// PRIORITIES / TASKS
+// =====================
+function renderPriorities() {
+  const container = document.getElementById('priorities-container');
+  container.innerHTML = '';
+
+  let currentPhase = null;
+  PRIORITIES.forEach(p => {
+    if (p.phase !== currentPhase) {
+      currentPhase = p.phase;
+      const ph = PHASES.find(ph => ph.id === p.phase);
+      const header = document.createElement('div');
+      header.className = 'phase-header';
+      header.textContent = ph.label;
+      container.appendChild(header);
+    }
+    container.appendChild(buildPriorityBlock(p));
+  });
+}
+
+function buildPriorityBlock(p) {
+  const block = document.createElement('div');
+  block.className = 'priority-block';
+  block.id = 'priority-' + p.id;
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'priority-header';
+  header.innerHTML = `
+    <div class="priority-title">
+      <div class="priority-num">${p.id}</div>
+      <div>
+        <div class="priority-name">${p.name}</div>
+        ${p.note ? `<div class="priority-note">${p.note}</div>` : ''}
       </div>
-      <div class="priority-body">
-        <p>${p.desc}</p>
-        <div class="meta-row">
-          <div class="meta-item"><label>Timeline</label><span>${p.timeline}</span></div>
-          <div class="meta-item"><label>Deliverable</label><span>${p.deliverable}</span></div>
-          <div class="meta-item"><label>Owner</label><span>${p.owner}</span></div>
-        </div>
-        <div class="dot-voting-section">
-          <span class="dot-voting-label">Board Confidence — click + to add a dot · click any dot to remove it</span>
-          <div class="dot-voting-controls">
-            <div class="dot-add-group">
-              <button class="dot-add-btn gbtn" onclick="addDot('${p.id}','g')" title="Add Confident dot">+</button>
-              <span class="dot-add-label gl">Confident</span>
-            </div>
-            <div class="dot-add-group">
-              <button class="dot-add-btn ybtn" onclick="addDot('${p.id}','y')" title="Add Questions dot">+</button>
-              <span class="dot-add-label yl">Questions</span>
-            </div>
-            <div class="dot-add-group">
-              <button class="dot-add-btn rbtn" onclick="addDot('${p.id}','r')" title="Add Hold up dot">+</button>
-              <span class="dot-add-label rl">Hold up</span>
-            </div>
-          </div>
-          <div class="dot-display-row" id="${p.id}-dots"><span class="dot-empty-hint">No dots yet — click + above to add</span></div>
-        </div>
-        <div class="qa-section">
-          <span class="qa-label">Questions &amp; Follow-ups</span>
-          <div class="qa-list" id="${p.id}-qa-list"><p class="qa-empty">No questions logged yet.</p></div>
-          <button class="add-qa-btn" onclick="showQaForm('${p.id}')">+ Log a question or follow-up</button>
-          <div class="qa-form" id="${p.id}-qa-form">
-            <input type="text" id="${p.id}-qa-q" placeholder="Question or concern from the session...">
-            <input type="text" id="${p.id}-qa-who" placeholder="Asked by (optional — e.g. Vivian, Lou)">
-            <div class="qa-form-actions">
-              <button class="qa-form-cancel" onclick="hideQaForm('${p.id}')">Cancel</button>
-              <button class="qa-form-add" onclick="addQaItem('${p.id}')">Add question</button>
-            </div>
-          </div>
-        </div>
-        <span class="notes-label">Session notes</span>
-        <textarea class="notes-area" data-key="${p.id}-notes" placeholder="Add notes from planning sessions..."></textarea>
-      </div>`;
+    </div>
+    <div class="chevron">▼</div>
+  `;
+  header.onclick = () => {
+    block.classList.toggle('open');
+  };
+  block.appendChild(header);
+
+  // Dot voter
+  const dv = document.createElement('div');
+  dv.className = 'dot-voter';
+  dv.innerHTML = `
+    <label>Board confidence:</label>
+    <button class="dot-btn green" title="Add green dot" onclick="addDot(${p.id},'green',this)">+</button>
+    <div class="dot-display" id="dots-green-${p.id}"></div>
+    <span class="dot-voter-sep">|</span>
+    <button class="dot-btn yellow" title="Add yellow dot" onclick="addDot(${p.id},'yellow',this)">+</button>
+    <div class="dot-display" id="dots-yellow-${p.id}"></div>
+    <span class="dot-voter-sep">|</span>
+    <button class="dot-btn red" title="Add red dot" onclick="addDot(${p.id},'red',this)">+</button>
+    <div class="dot-display" id="dots-red-${p.id}"></div>
+  `;
+  block.appendChild(dv);
+
+  // Body
+  const body = document.createElement('div');
+  body.className = 'priority-body';
+
+  // Tasks
+  const tasks = state.tasks[p.id];
+  let lastGroup = undefined;
+
+  tasks.forEach((task, idx) => {
+    if (task.group !== lastGroup) {
+      lastGroup = task.group;
+      if (task.group) {
+        const gl = document.createElement('div');
+        gl.className = 'task-group-label';
+        gl.textContent = task.group;
+        body.appendChild(gl);
+      }
+    }
+    body.appendChild(buildTaskRow(p.id, task, idx));
+  });
+
+  // Add task row
+  const addRow = document.createElement('div');
+  addRow.className = 'add-task-row';
+  addRow.innerHTML = `
+    <input class="add-task-input" id="new-task-${p.id}" placeholder="Add a task..." onkeydown="if(event.key==='Enter') addTask(${p.id})">
+    <button class="add-task-btn" onclick="addTask(${p.id})">Add</button>
+  `;
+  body.appendChild(addRow);
+
+  // Q&A
+  const qa = state.qa[p.id];
+  const qaSection = document.createElement('div');
+  qaSection.className = 'qa-section';
+  qaSection.id = 'qa-' + p.id;
+  qaSection.innerHTML = `<h5>Questions & Concerns</h5>`;
+  qa.forEach((item, idx) => {
+    qaSection.appendChild(buildQAItem(p.id, item, idx));
+  });
+  // Add Q&A
+  const qaAdd = document.createElement('div');
+  qaAdd.className = 'qa-add';
+  qaAdd.innerHTML = `
+    <input id="qa-q-${p.id}" placeholder="Log a question...">
+    <input id="qa-by-${p.id}" placeholder="Asked by (optional)">
+    <button onclick="addQA(${p.id})">Add</button>
+  `;
+  qaSection.appendChild(qaAdd);
+  body.appendChild(qaSection);
+
+  block.appendChild(body);
+  return block;
+}
+
+function buildTaskRow(pid, task, idx) {
+  const row = document.createElement('div');
+  row.className = 'task-row';
+  row.id = `task-${pid}-${idx}`;
+
+  const isDone = task.status === 'Done ✓';
+
+  // Badge
+  let badge = '';
+  if (task.status === 'Ongoing') badge = `<span class="task-badge ongoing">Ongoing</span>`;
+  if (task.status === 'Blocked') badge = `<span class="task-badge blocked">Blocked</span>`;
+  if (task.status === 'Pending') badge = `<span class="task-badge pending">Pending</span>`;
+
+  row.innerHTML = `
+    <div class="task-text">
+      <input type="checkbox" ${isDone ? 'checked' : ''} onchange="toggleDone(${pid},${idx},this)">
+      <span class="task-label ${isDone ? 'done-label' : ''}">${task.text}${badge}</span>
+    </div>
+    <select class="dept-select" onchange="updateTask(${pid},${idx},'dept',this.value)">
+      ${DEPTS.map(d => `<option ${task.dept===d?'selected':''}>${d}</option>`).join('')}
+    </select>
+    <select class="status-select" onchange="updateTask(${pid},${idx},'status',this.value)">
+      ${STATUSES.map(s => `<option ${task.status===s?'selected':''}>${s}</option>`).join('')}
+    </select>
+    <textarea class="task-notes" placeholder="Notes..." onchange="updateTask(${pid},${idx},'notes',this.value)">${task.notes||''}</textarea>
+  `;
+  return row;
+}
+
+function buildQAItem(pid, item, idx) {
+  const div = document.createElement('div');
+  div.className = 'qa-item' + (item.resolved ? ' resolved' : '');
+  div.innerHTML = `
+    <div class="qa-q">${item.q}</div>
+    ${item.by ? `<div class="qa-meta">Asked by: ${item.by}</div>` : ''}
+    ${item.answer ? `<div class="qa-answer">${item.answer}</div>` : `<textarea class="task-notes" style="width:100%;margin-top:6px" placeholder="Add answer / resolution..." onchange="answerQA(${pid},${idx},this.value)"></textarea>`}
+    ${!item.resolved ? `<button class="btn-sm" style="margin-top:6px" onclick="resolveQA(${pid},${idx})">Mark resolved</button>` : '<div style="font-size:11px;color:var(--green);margin-top:4px">✓ Resolved</div>'}
+  `;
+  return div;
+}
+
+function toggleDone(pid, idx, cb) {
+  state.tasks[pid][idx].status = cb.checked ? 'Done ✓' : 'Not Yet';
+  const label = document.querySelector(`#task-${pid}-${idx} .task-label`);
+  if (label) label.classList.toggle('done-label', cb.checked);
+}
+
+function updateTask(pid, idx, field, value) {
+  state.tasks[pid][idx][field] = value;
+}
+
+function addTask(pid) {
+  const input = document.getElementById('new-task-' + pid);
+  const text = input.value.trim();
+  if (!text) return;
+  const newTask = { text, dept: '—', status: 'Not Yet', notes: '', group: null, id: state.tasks[pid].length };
+  state.tasks[pid].push(newTask);
+  input.value = '';
+
+  // Re-render just this priority block
+  const block = document.getElementById('priority-' + pid);
+  const wasOpen = block.classList.contains('open');
+  const p = PRIORITIES.find(pr => pr.id === pid);
+  const newBlock = buildPriorityBlock(p);
+  if (wasOpen) newBlock.classList.add('open');
+  block.replaceWith(newBlock);
+  renderDots(pid);
+}
+
+function addQA(pid) {
+  const q = document.getElementById('qa-q-' + pid).value.trim();
+  const by = document.getElementById('qa-by-' + pid).value.trim();
+  if (!q) return;
+  state.qa[pid].push({ q, by, answer: '', resolved: false, id: state.qa[pid].length });
+  const p = PRIORITIES.find(pr => pr.id === pid);
+  const block = document.getElementById('priority-' + pid);
+  const wasOpen = block.classList.contains('open');
+  const newBlock = buildPriorityBlock(p);
+  if (wasOpen) newBlock.classList.add('open');
+  block.replaceWith(newBlock);
+  renderDots(pid);
+}
+
+function answerQA(pid, idx, val) {
+  state.qa[pid][idx].answer = val;
+}
+
+function resolveQA(pid, idx) {
+  state.qa[pid][idx].resolved = true;
+  const p = PRIORITIES.find(pr => pr.id === pid);
+  const block = document.getElementById('priority-' + pid);
+  const wasOpen = block.classList.contains('open');
+  const newBlock = buildPriorityBlock(p);
+  if (wasOpen) newBlock.classList.add('open');
+  block.replaceWith(newBlock);
+  renderDots(pid);
+}
+
+// =====================
+// DOTS
+// =====================
+function addDot(pid, color, btn) {
+  const ts = Date.now();
+  state.dots[pid][color].push(ts);
+  renderDots(pid);
+}
+
+function renderDots(pid) {
+  ['green','yellow','red'].forEach(color => {
+    const el = document.getElementById(`dots-${color}-${pid}`);
+    if (!el) return;
+    el.innerHTML = state.dots[pid][color].map((ts,i) =>
+      `<span class="dot ${color}" title="Click to remove" onclick="removeDot(${pid},'${color}',${i})" style="cursor:pointer"></span>`
+    ).join('');
+  });
+}
+
+function removeDot(pid, color, idx) {
+  state.dots[pid][color].splice(idx, 1);
+  renderDots(pid);
+}
+
+// =====================
+// LISTENING LOG
+// =====================
+function addListeningEntry() {
+  const entry = {
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}),
+    group: 'community',
+    who: '',
+    themes: '',
+    youthNeeds: '',
+    partnerNeeds: '',
+    followUp: '',
+  };
+  state.listening.unshift(entry);
+  renderListening();
+}
+
+function renderListening() {
+  const container = document.getElementById('listening-entries');
+  container.innerHTML = '';
+  if (state.listening.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-style:italic">No sessions logged yet. Click "Log a Session" to begin.</p>';
+    return;
+  }
+  state.listening.forEach((entry, idx) => {
+    const card = document.createElement('div');
+    card.className = 'log-card';
+    const groupLabels = { copresenter: 'Co-Presenter', collaborator: 'Community Collaborator', community: 'Community Member' };
+    const chipClass = { copresenter: 'chip-copresenter', collaborator: 'chip-collaborator', community: 'chip-community' };
+    card.innerHTML = `
+      <h4>Session — ${entry.date} <span class="group-chip ${chipClass[entry.group]}">${groupLabels[entry.group]}</span></h4>
+      <div class="log-meta">
+        <span><strong>Group type:</strong>
+          <select onchange="updateListening(${idx},'group',this.value)" style="font-family:Georgia,serif;font-size:12px;border:1px solid var(--border);border-radius:4px;padding:2px 6px">
+            <option value="copresenter" ${entry.group==='copresenter'?'selected':''}>Co-Presenter</option>
+            <option value="collaborator" ${entry.group==='collaborator'?'selected':''}>Community Collaborator</option>
+            <option value="community" ${entry.group==='community'?'selected':''}>Community Member</option>
+          </select>
+        </span>
+      </div>
+      <div class="log-field"><label>Who attended / group description</label><textarea onchange="updateListening(${idx},'who',this.value)">${entry.who}</textarea></div>
+      <div class="log-field"><label>Key themes heard</label><textarea onchange="updateListening(${idx},'themes',this.value)">${entry.themes}</textarea></div>
+      <div class="log-field"><label>Youth needs identified</label><textarea onchange="updateListening(${idx},'youthNeeds',this.value)">${entry.youthNeeds}</textarea></div>
+      <div class="log-field"><label>Partner needs identified</label><textarea onchange="updateListening(${idx},'partnerNeeds',this.value)">${entry.partnerNeeds}</textarea></div>
+      <div class="log-field"><label>Follow-up needed</label><textarea onchange="updateListening(${idx},'followUp',this.value)">${entry.followUp}</textarea></div>
+    `;
     container.appendChild(card);
   });
-  // Phase 3
-  const ph3=document.createElement('div');
-  ph3.className='phase-header';
-  ph3.style.marginTop='32px';
-  ph3.innerHTML='<span class="phase-tag">Phase 3</span><span class="phase-title">Growth &amp; Continuity</span><span class="phase-months">Year 2+</span>';
-  container.appendChild(ph3);
-  const ph3text=document.createElement('div');
-  ph3text.innerHTML='<p style="margin-top:12px;">Phase 3 will be shaped by what we learn in Phases 1 and 2. We will not pursue growth we are not ready to sustain.</p><p><strong>Youth Programming:</strong> If pilots validate youth engagement as natural and sustainable, we develop structured programming for 2027 and beyond.</p><p><strong>Capital Project Execution:</strong> With a governance framework in place, future projects move forward with defined scope, funding plans, and clear leadership.</p>';
-  container.appendChild(ph3text);
 }
 
-// ---- DOT VOTING ----
-function addDot(pid,color){
-  if(!state.dots[pid])state.dots[pid]=[];
-  state.dots[pid].push(color);
-  saveState();
-  renderDots(pid);
+function updateListening(idx, field, value) {
+  state.listening[idx][field] = value;
 }
-function removeDot(pid,idx){
-  if(!state.dots[pid])return;
-  state.dots[pid].splice(idx,1);
-  saveState();
-  renderDots(pid);
+
+// =====================
+// SESSION LOG
+// =====================
+function addSessionEntry() {
+  state.sessions.unshift({
+    id: Date.now(),
+    date: new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}),
+    title: '',
+    attendees: '',
+    decisions: '',
+    assignments: '',
+    nextSteps: '',
+    notes: '',
+  });
+  renderSessions();
 }
-function renderDots(pid){
-  const container=document.getElementById(pid+'-dots');
-  const summary=document.getElementById(pid+'-summary');
-  if(!container)return;
-  const dots=state.dots[pid]||[];
-  container.innerHTML='';
-  if(dots.length===0){
-    container.innerHTML='<span class="dot-empty-hint">No dots yet — click + above to add</span>';
-  } else {
-    dots.forEach((c,i)=>{
-      const d=document.createElement('span');
-      d.className='dot '+c+'d';
-      const labels={g:'Confident',y:'Questions',r:'Hold up'};
-      d.title='Click to remove ('+labels[c]+')';
-      d.onclick=()=>removeDot(pid,i);
-      container.appendChild(d);
-    });
+
+function renderSessions() {
+  const container = document.getElementById('session-entries');
+  container.innerHTML = '';
+  if (state.sessions.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-style:italic">No sessions logged yet.</p>';
+    return;
   }
-  const g=dots.filter(d=>d==='g').length;
-  const y=dots.filter(d=>d==='y').length;
-  const r=dots.filter(d=>d==='r').length;
-  const parts=[];
-  if(g)parts.push(g+' confident');
-  if(y)parts.push(y+' questions');
-  if(r)parts.push(r+' hold up');
-  if(summary)summary.textContent=dots.length?parts.join(' · '):'';
-  const card=document.getElementById(pid);
-  card.classList.remove('confidence-green','confidence-yellow','confidence-red');
-  if(dots.length>0){
-    if(g>y&&g>r)card.classList.add('confidence-green');
-    else if(r>g&&r>=y)card.classList.add('confidence-red');
-    else card.classList.add('confidence-yellow');
+  state.sessions.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'session-card';
+    card.innerHTML = `
+      <div class="session-field"><label>Session title</label><input type="text" value="${s.title}" onchange="updateSession(${idx},'title',this.value)" placeholder="e.g. Board Retreat Session 1"></div>
+      <div class="session-date">${s.date}</div>
+      <div class="session-field"><label>Attendees</label><textarea onchange="updateSession(${idx},'attendees',this.value)">${s.attendees}</textarea></div>
+      <div class="session-field"><label>Decisions made</label><textarea onchange="updateSession(${idx},'decisions',this.value)">${s.decisions}</textarea></div>
+      <div class="session-field"><label>Assignments</label><textarea onchange="updateSession(${idx},'assignments',this.value)">${s.assignments}</textarea></div>
+      <div class="session-field"><label>Next steps</label><textarea onchange="updateSession(${idx},'nextSteps',this.value)">${s.nextSteps}</textarea></div>
+      <div class="session-field"><label>Additional notes</label><textarea onchange="updateSession(${idx},'notes',this.value)">${s.notes}</textarea></div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function updateSession(idx, field, value) {
+  state.sessions[idx][field] = value;
+}
+
+// =====================
+// PARKING LOT
+// =====================
+function renderParking() {
+  const container = document.getElementById('parking-items');
+  container.innerHTML = '';
+  PARKING_LOT.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'parking-item' + (item.resolved ? ' parking-resolved' : '');
+    div.innerHTML = `
+      <h5>🅿️ ${item.title}</h5>
+      <p>${item.desc}</p>
+      <div class="parking-meta">Owner: ${item.owner} · Timing: ${item.timing}</div>
+      ${!item.resolved ? `<button class="btn-sm" style="margin-top:8px" onclick="resolveParking(${idx})">Mark resolved</button>` : '<div style="font-size:11px;color:var(--green);margin-top:6px">✓ Resolved — moved to tasks</div>'}
+    `;
+    container.appendChild(div);
+  });
+
+  // Add new parking item
+  const addDiv = document.createElement('div');
+  addDiv.style = 'margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;';
+  addDiv.innerHTML = `
+    <input id="new-parking-title" class="add-task-input" style="flex:1;min-width:200px" placeholder="Add parking lot item...">
+    <button class="add-task-btn" onclick="addParkingItem()">Add</button>
+  `;
+  container.appendChild(addDiv);
+}
+
+function resolveParking(idx) {
+  PARKING_LOT[idx].resolved = true;
+  renderParking();
+}
+
+function addParkingItem() {
+  const input = document.getElementById('new-parking-title');
+  const title = input.value.trim();
+  if (!title) return;
+  PARKING_LOT.push({ title, desc: '', owner: 'TBD', timing: 'TBD', resolved: false });
+  input.value = '';
+  renderParking();
+}
+
+// =====================
+// CHANGE LOG
+// =====================
+function addChangeEntry() {
+  CHANGE_LOG.unshift({
+    date: new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'}),
+    desc: '',
+    editing: true,
+  });
+  renderChangeLog();
+}
+
+function updateChangeLog(idx, field, value) {
+  CHANGE_LOG[idx][field] = value;
+}
+
+function deleteChangeEntry(idx) {
+  if (confirm('Remove this change log entry?')) {
+    CHANGE_LOG.splice(idx, 1);
+    renderChangeLog();
   }
 }
 
-// ---- Q&A ----
-function showQaForm(pid){
-  document.getElementById(pid+'-qa-form').classList.add('visible');
-  document.getElementById(pid+'-qa-q').focus();
-}
-function hideQaForm(pid){
-  document.getElementById(pid+'-qa-form').classList.remove('visible');
-  document.getElementById(pid+'-qa-q').value='';
-  document.getElementById(pid+'-qa-who').value='';
-}
-function addQaItem(pid){
-  const q=document.getElementById(pid+'-qa-q').value.trim();
-  if(!q)return;
-  const who=document.getElementById(pid+'-qa-who').value.trim();
-  if(!state.qa[pid])state.qa[pid]=[];
-  state.qa[pid].push({id:'qa'+Date.now(),question:q,asker:who,answer:'',resolved:false});
-  saveState();
-  hideQaForm(pid);
-  renderQa(pid);
-}
-function deleteQaItem(pid,id){
-  if(!state.qa[pid])return;
-  state.qa[pid]=state.qa[pid].filter(q=>q.id!==id);
-  saveState();
-  renderQa(pid);
-}
-function toggleQaAnswer(pid,id){
-  const el=document.getElementById('qa-item-'+id);
-  if(el)el.classList.toggle('show-answer');
-}
-function toggleQaResolved(pid,id){
-  if(!state.qa[pid])return;
-  const q=state.qa[pid].find(q=>q.id===id);
-  if(q){q.resolved=!q.resolved;saveState();renderQa(pid);}
-}
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function renderQa(pid){
-  const list=document.getElementById(pid+'-qa-list');
-  if(!list)return;
-  const items=state.qa[pid]||[];
-  list.innerHTML='';
-  if(!items.length){list.innerHTML='<p class="qa-empty">No questions logged yet.</p>';return;}
-  items.forEach(item=>{
-    const div=document.createElement('div');
-    div.className='qa-item'+(item.resolved?' resolved':'')+(item.answer?' show-answer':'');
-    div.id='qa-item-'+item.id;
-    div.innerHTML=`
-      <div class="qa-header">
-        <div class="qa-dot"></div>
-        <div class="qa-body">
-          <div class="qa-q">${esc(item.question)}</div>
-          ${item.asker?`<div class="qa-who">— ${esc(item.asker)}</div>`:''}
-        </div>
-        <div class="qa-actions">
-          <button class="qa-btn" onclick="toggleQaAnswer('${pid}','${item.id}')">${item.answer?'Edit answer':'Add answer'}</button>
-          <button class="qa-btn qa-resolve-btn" onclick="toggleQaResolved('${pid}','${item.id}')">${item.resolved?'✓ Resolved':'Resolve'}</button>
-          <button class="qa-del" onclick="deleteQaItem('${pid}','${item.id}')" title="Delete">×</button>
-        </div>
+function renderChangeLog() {
+  const container = document.getElementById('change-items');
+  container.innerHTML = '';
+  CHANGE_LOG.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = 'change-item';
+    div.style = 'flex-direction:column;gap:8px;';
+    div.innerHTML = `
+      <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;">
+        <input type="text" value="${item.date}" onchange="updateChangeLog(${idx},'date',this.value)"
+          style="font-family:Georgia,serif;font-size:12px;font-weight:700;color:var(--gold);border:1px solid var(--border);border-radius:4px;padding:4px 8px;width:130px;">
+        <textarea onchange="updateChangeLog(${idx},'desc',this.value)"
+          style="flex:1;min-width:200px;font-family:Georgia,serif;font-size:13px;border:1px solid var(--border);border-radius:4px;padding:6px 10px;resize:vertical;min-height:48px;color:var(--dark);">${item.desc}</textarea>
+        <button class="btn-sm" onclick="deleteChangeEntry(${idx})" title="Remove entry" style="color:var(--red);border-color:var(--red);flex-shrink:0;">✕</button>
       </div>
-      <div class="qa-answer-wrap">
-        <textarea class="qa-answer" placeholder="Type the answer or follow-up here..." id="qa-ans-${item.id}">${esc(item.answer)}</textarea>
-      </div>`;
-    list.appendChild(div);
-    div.querySelector('.qa-answer').addEventListener('input',function(){
-      const q=state.qa[pid].find(q=>q.id===item.id);
-      if(q){q.answer=this.value;saveState();}
-    });
+    `;
+    container.appendChild(div);
   });
 }
 
-function saveStat(key,val){state.stats[key]=val;saveState();}
-
-function ownerOptions(sel){return OWNERS.map(o=>`<option value="${o}" ${o===sel?'selected':''}>${o}</option>`).join('');}
-function sessionOptions(sel){return SESSIONS.map(s=>`<option value="${s}" ${s===sel?'selected':''}>${s}</option>`).join('');}
-
-function renderMilestones(){
-  const container=document.getElementById('milestone-list');
-  container.innerHTML='';
-  const allPeriods=[...DEFAULT_MILESTONES];
-  const customItems=Object.values(state.customTasks);
-  if(customItems.length>0)allPeriods.push({period:'Added in Sessions',items:customItems});
-  allPeriods.forEach(period=>{
-    const wrap=document.createElement('div');
-    const ms=state.milestones;
-    const done=period.items.filter(i=>ms[i.id]&&ms[i.id].checked).length;
-    wrap.innerHTML=`<div class="milestone-period">${period.period}<span style="font-size:11px;color:var(--muted);font-weight:400;">${done}/${period.items.length} complete</span></div>`;
-    period.items.forEach(item=>{
-      const s=ms[item.id]||{};
-      const checked=s.checked||false;
-      const status=s.status||'notstarted';
-      const owner=s.owner||item.owner||'TBD';
-      const session=s.session||'—';
-      const blocked=s.blocked||'';
-      const isCustom=!!state.customTasks[item.id];
-      const row=document.createElement('div');
-      row.className='milestone-row';
-      row.id='row-'+item.id;
-      row.innerHTML=`
-        <div class="milestone-check"><input type="checkbox" id="chk-${item.id}" ${checked?'checked':''} onchange="toggleMilestone('${item.id}',this.checked)"></div>
-        <div class="milestone-text">
-          <div class="m-title ${checked?'done':''}" id="mtitle-${item.id}">${item.text}</div>
-          <div class="m-sub"><span>${item.timing||''}</span>${session!=='—'?`<span class="session-tag">${session}</span>`:''}</div>
-        </div>
-        <div class="milestone-controls">
-          <select class="owner-select" onchange="updateMilestone('${item.id}','owner',this.value)">${ownerOptions(owner)}</select>
-          <select class="status-select s-${status}" id="sel-${item.id}" onchange="updateMilestone('${item.id}','status',this.value)">
-            <option value="notstarted" ${status==='notstarted'?'selected':''}>Not started</option>
-            <option value="inprogress" ${status==='inprogress'?'selected':''}>In progress</option>
-            <option value="complete" ${status==='complete'?'selected':''}>Complete</option>
-            <option value="blocked" ${status==='blocked'?'selected':''}>Blocked</option>
-          </select>
-          <select class="session-select" onchange="updateMilestone('${item.id}','session',this.value)">${sessionOptions(session)}</select>
-          ${isCustom?`<button class="delete-task" onclick="deleteCustomTask('${item.id}')" title="Remove">×</button>`:''}
-        </div>`;
-      const bwrap=document.createElement('div');
-      bwrap.className='blocked-note-wrap'+(status==='blocked'?' visible':'');
-      bwrap.id='bwrap-'+item.id;
-      bwrap.innerHTML=`<textarea class="blocked-note" placeholder="What's blocking this? Who needs to act?" id="bnote-${item.id}">${blocked}</textarea>`;
-      wrap.appendChild(row);
-      wrap.appendChild(bwrap);
-    });
-    const periodKey=period.period.replace(/\s+/g,'-').toLowerCase();
-    const addBtn=document.createElement('button');
-    addBtn.className='add-task-btn';
-    addBtn.textContent='+ Add task from session';
-    addBtn.onclick=()=>showAddForm(periodKey,period.period);
-    wrap.appendChild(addBtn);
-    const formDiv=document.createElement('div');
-    formDiv.className='custom-task-form';
-    formDiv.id='form-'+periodKey;
-    formDiv.innerHTML=`
-      <input type="text" id="new-task-text-${periodKey}" placeholder="Task or milestone description...">
-      <div class="form-row">
-        <select id="new-task-owner-${periodKey}">${ownerOptions('TBD')}</select>
-        <select id="new-task-session-${periodKey}">${sessionOptions('—')}</select>
-        <input type="text" id="new-task-timing-${periodKey}" placeholder="Timing (e.g. August)" style="flex:1;min-width:100px;">
-      </div>
-      <div class="form-actions">
-        <button class="btn-cancel" onclick="hideAddForm('${periodKey}')">Cancel</button>
-        <button class="btn-add" onclick="addCustomTask('${periodKey}')">Add task</button>
-      </div>`;
-    wrap.appendChild(formDiv);
-    container.appendChild(wrap);
-  });
-  bindBlockedNotes();
-  updateProgress();
-}
-
-function showAddForm(key){const f=document.getElementById('form-'+key);f.classList.add('visible');document.getElementById('new-task-text-'+key).focus();}
-function hideAddForm(key){document.getElementById('form-'+key).classList.remove('visible');}
-function addCustomTask(periodKey){
-  const text=document.getElementById('new-task-text-'+periodKey).value.trim();
-  if(!text)return;
-  const owner=document.getElementById('new-task-owner-'+periodKey).value;
-  const session=document.getElementById('new-task-session-'+periodKey).value;
-  const timing=document.getElementById('new-task-timing-'+periodKey).value.trim();
-  const id='custom-'+Date.now();
-  state.customTasks[id]={id,text,owner,timing:timing||'TBD'};
-  state.milestones[id]={checked:false,status:'notstarted',owner,session,blocked:''};
-  saveState();
-  renderMilestones();
-}
-function deleteCustomTask(id){delete state.customTasks[id];delete state.milestones[id];saveState();renderMilestones();}
-function toggleMilestone(id,checked){
-  if(!state.milestones[id])state.milestones[id]={};
-  state.milestones[id].checked=checked;
-  document.getElementById('mtitle-'+id).className='m-title'+(checked?' done':'');
-  if(checked){state.milestones[id].status='complete';const sel=document.getElementById('sel-'+id);if(sel){sel.value='complete';sel.className='status-select s-complete';}}
-  saveState();updateProgress();
-}
-function updateMilestone(id,field,val){
-  if(!state.milestones[id])state.milestones[id]={};
-  state.milestones[id][field]=val;
-  if(field==='status'){
-    document.getElementById('sel-'+id).className='status-select s-'+val;
-    const bwrap=document.getElementById('bwrap-'+id);
-    if(bwrap)bwrap.className='blocked-note-wrap'+(val==='blocked'?' visible':'');
-    if(val==='complete'){document.getElementById('chk-'+id).checked=true;state.milestones[id].checked=true;document.getElementById('mtitle-'+id).className='m-title done';}
-    updateProgress();
-  }
-  saveState();
-}
-function bindBlockedNotes(){
-  document.querySelectorAll('.blocked-note').forEach(el=>{
-    const id=el.id.replace('bnote-','');
-    el.addEventListener('input',()=>{if(!state.milestones[id])state.milestones[id]={};state.milestones[id].blocked=el.value;saveState();});
-  });
-}
-function updateProgress(){
-  let total=0,done=0;
-  DEFAULT_MILESTONES.forEach(p=>p.items.forEach(i=>{total++;if(state.milestones[i.id]&&state.milestones[i.id].checked)done++;}));
-  Object.keys(state.customTasks).forEach(id=>{total++;if(state.milestones[id]&&state.milestones[id].checked)done++;});
-  const pct=total?Math.round((done/total)*100):0;
-  ['overall-bar','m-bar'].forEach(id=>{const el=document.getElementById(id);if(el){el.style.width=pct+'%';el.className='progress-bar'+(pct===100?' complete':'');}});
-  ['overall-pct','m-pct'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=pct;});
-}
-function renderSuccess(){
-  const list=document.getElementById('success-list');
-  list.innerHTML='';
-  const all=[...DEFAULT_SUCCESS.map((t,i)=>({id:'s'+i,text:t,custom:false})),...state.customSuccess.map(s=>({...s,custom:true}))];
-  all.forEach(item=>{
-    const s=state.success[item.id]||{};
-    const checked=s.checked||false;
-    const feedback=s.feedback||'';
-    const li=document.createElement('li');
-    li.className='success-item';
-    li.innerHTML=`
-      <div class="success-check"><input type="checkbox" onchange="toggleSuccess('${item.id}',this.checked)" ${checked?'checked':''}></div>
-      <div style="flex:1;">
-        <div class="success-text ${checked?'done':''}" id="stxt-${item.id}">${item.text}</div>
-        <textarea class="success-feedback" placeholder="Board input, feedback, or notes on this item..." id="sfb-${item.id}">${feedback}</textarea>
-      </div>
-      ${item.custom?`<button class="delete-task" onclick="deleteSuccess('${item.id}')" title="Remove">×</button>`:''}`;
-    list.appendChild(li);
-  });
-  document.querySelectorAll('.success-feedback').forEach(el=>{
-    const id=el.id.replace('sfb-','');
-    el.addEventListener('input',()=>{if(!state.success[id])state.success[id]={};state.success[id].feedback=el.value;saveState();});
-  });
-}
-function toggleSuccess(id,checked){
-  if(!state.success[id])state.success[id]={};
-  state.success[id].checked=checked;
-  const el=document.getElementById('stxt-'+id);
-  if(el)el.className='success-text'+(checked?' done':'');
-  saveState();
-}
-function addSuccessItem(){
-  const text=prompt('Add a new success marker or board input:');
-  if(!text||!text.trim())return;
-  const id='cs'+Date.now();
-  state.customSuccess.push({id,text:text.trim()});
-  state.success[id]={checked:false,feedback:''};
-  saveState();renderSuccess();
-}
-function deleteSuccess(id){
-  state.customSuccess=state.customSuccess.filter(s=>s.id!==id);
-  delete state.success[id];
-  saveState();renderSuccess();
-}
-
-function initAll(){
-  buildPriorities();
-  document.querySelectorAll('[data-key]').forEach(el=>{
-    const key=el.dataset.key;
-    if(state[key])el.value=state[key];
-    el.addEventListener('input',()=>{state[key]=el.value;saveState();});
-  });
-  const statKeys=['events','donors','grants','pending','reserve','weddings'];
-  statKeys.forEach(k=>{if(state.stats[k])document.getElementById('stat-'+k).value=state.stats[k];});
-  PRIORITIES.forEach(p=>{renderDots(p.id);renderQa(p.id);});
-  renderMilestones();
-  renderSuccess();
-  updateProgress();
-}
-initAll();
+// =====================
+// INIT
+// =====================
+initState();
+renderPriorities();
+renderListening();
+renderSessions();
+renderParking();
+renderChangeLog();
+renderDashboard();
 </script>
 </body>
 </html>
