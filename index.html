@@ -32,6 +32,8 @@ body { font-family: Georgia, serif; background: var(--bg); color: var(--dark); f
 .top-bar { background: var(--maroon); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .top-bar h1 { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: 0.01em; }
 .top-bar span { color: var(--gold); font-size: 13px; }
+.save-indicator { font-size: 11px; color: #d9b87a; opacity: 0; transition: opacity 0.3s; }
+.save-indicator.visible { opacity: 1; }
 
 /* NAV */
 nav { background: var(--white); border-bottom: 2px solid var(--border); padding: 0 32px; display: flex; gap: 0; overflow-x: auto; }
@@ -190,16 +192,19 @@ select.dept-select:focus, select.status-select:focus { outline: 2px solid var(--
 
 <div class="top-bar">
   <h1>Wright Opera House — Strategic Plan Tracker</h1>
-  <span>2026 · Living Document</span>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="save-indicator" id="save-indicator">✓ Saved</span>
+    <span>2026 · Living Document</span>
+  </div>
 </div>
 
 <nav>
-  <button class="active" onclick="showTab('dashboard')">📊 Dashboard</button>
-  <button onclick="showTab('tasks')">✅ Tasks by Priority</button>
-  <button onclick="showTab('listening')">👂 Listening Log</button>
-  <button onclick="showTab('sessions')">📋 Session Log</button>
-  <button onclick="showTab('parking')">🅿️ Parking Lot</button>
-  <button onclick="showTab('changelog')">📝 Change Log</button>
+  <button class="active" onclick="showTab('dashboard', this)">📊 Dashboard</button>
+  <button onclick="showTab('tasks', this)">✅ Tasks by Priority</button>
+  <button onclick="showTab('listening', this)">👂 Listening Log</button>
+  <button onclick="showTab('sessions', this)">📋 Session Log</button>
+  <button onclick="showTab('parking', this)">🅿️ Parking Lot</button>
+  <button onclick="showTab('changelog', this)">📝 Change Log</button>
 </nav>
 
 <div class="content">
@@ -264,7 +269,7 @@ select.dept-select:focus, select.status-select:focus { outline: 2px solid var(--
 // DATA
 // =====================
 
-const DEPTS = ['—', 'ED', 'Operations', 'Events & Programming', 'Marketing', 'Finances', 'Board', 'ED + Board', 'ED + Marketing'];
+const DEPTS = ['—', 'ED', 'Operations', 'Events & Programming', 'Marketing', 'Finances', 'Board', 'ED + Board', 'ED + Marketing', 'ED + Operations', 'ED + Finances'];
 const STATUSES = ['Not Yet', 'In Progress', 'Done ✓', 'Ongoing', 'Blocked', 'Pending', 'TBD'];
 
 const PHASES = [
@@ -272,6 +277,19 @@ const PHASES = [
   { id: 'p2', label: 'Phase 2 · Revenue & Stability' },
   { id: 'p3', label: 'Phase 3 · Growth & Continuity (Year 2+)' },
 ];
+
+// Session 1 board dot exercise results (June 2026)
+// green = confident · yellow = questions · red = want to discuss
+const SESSION1_DOTS = {
+  1: { green: 5, yellow: 1, red: 0 },
+  2: { green: 2, yellow: 0, red: 5 },
+  3: { green: 3, yellow: 2, red: 4 },
+  4: { green: 2, yellow: 4, red: 3 },
+  5: { green: 0, yellow: 2, red: 3 },
+  6: { green: 0, yellow: 4, red: 5 },
+  7: { green: 6, yellow: 1, red: 1 },
+  8: { green: 0, yellow: 1, red: 6 },
+};
 
 const PRIORITIES = [
   {
@@ -484,7 +502,7 @@ const PRIORITIES = [
   },
 ];
 
-const PARKING_LOT = [
+const DEFAULT_PARKING = [
   { id: 1, title: 'Board narrative: programming volume vs. revenue reality', desc: 'Prepare presentation for board on why more programming doesn\'t automatically mean more revenue. We have twice as much programming this year as last year.', owner: 'ED', timing: 'TBD', resolved: false },
   { id: 2, title: 'Expense management structure', desc: 'No one on the team currently has a good structure for this. We consistently underestimate budget and overspend. Requires outside expertise — consultant, fractional CFO, or board finance lead. Assess first, then build.', owner: 'TBD', timing: 'TBD', resolved: false },
   { id: 3, title: 'Accountant relationship & financial process', desc: 'We have an accountant but the working relationship and process needs strengthening. ED to clarify what\'s needed from each side.', owner: 'ED', timing: 'TBD', resolved: false },
@@ -494,7 +512,7 @@ const PARKING_LOT = [
   { id: 7, title: 'Board narrative: youth program model research comes after market listening', desc: 'Address Vivian\'s question about other youth programs proactively. We\'re doing listening first — this is more rigorous, not less.', owner: 'ED', timing: 'Next board meeting', resolved: false },
 ];
 
-const CHANGE_LOG = [
+const DEFAULT_CHANGELOG = [
   { date: 'June 2026', desc: 'Reordered priorities. Program Evaluation moved from Priority 7 to Priority 4 (Phase 1) to reflect its role as a prerequisite for revenue and programming decisions. All downstream priorities renumbered accordingly.' },
   { date: 'June 2026', desc: 'Tracker structure established: Dashboard, Tasks by Priority, Listening Log, Session Log, Parking Lot, Change Log. Three-tab concept expanded to six for completeness.' },
   { date: 'June 2026', desc: 'Board Development removed from priority list per ED decision. Not a 2026 tracked priority.' },
@@ -502,40 +520,91 @@ const CHANGE_LOG = [
 ];
 
 // =====================
-// STATE
+// STATE & PERSISTENCE
 // =====================
+const STORAGE_KEY = 'wright-plan-v4';
+
 let state = {
-  tasks: {}, // priorityId -> array of task objects
-  dots: {}, // priorityId -> {green:[], yellow:[], red:[]}
-  qa: {}, // priorityId -> array
+  tasks: {},      // priorityId -> array of task objects
+  dots: {},       // priorityId -> {green:[], yellow:[], red:[]}
+  qa: {},         // priorityId -> array
   listening: [],
   sessions: [],
+  parking: [],
+  changelog: [],
 };
 
-function initState() {
+let saveTimer = null;
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    // Brief "Saved" flash in the top bar
+    const ind = document.getElementById('save-indicator');
+    if (ind) {
+      ind.classList.add('visible');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => ind.classList.remove('visible'), 1500);
+    }
+  } catch (e) {
+    console.error('Could not save to local storage:', e);
+  }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const saved = JSON.parse(raw);
+    if (!saved || typeof saved !== 'object') return false;
+    if (saved.tasks) state.tasks = saved.tasks;
+    if (saved.dots) state.dots = saved.dots;
+    if (saved.qa) state.qa = saved.qa;
+    if (saved.listening) state.listening = saved.listening;
+    if (saved.sessions) state.sessions = saved.sessions;
+    if (saved.parking) state.parking = saved.parking;
+    if (saved.changelog) state.changelog = saved.changelog;
+    return true;
+  } catch (e) {
+    console.error('Could not load saved data:', e);
+    return false;
+  }
+}
+
+function initDefaultState() {
   PRIORITIES.forEach(p => {
     // Flatten tasks
     let tasks = [];
-    if (p.tasks) tasks = p.tasks.map((t,i) => ({...t, id: i, group: null}));
+    if (p.tasks) tasks = p.tasks.map((t, i) => ({ ...t, id: i, group: null }));
     if (p.taskGroups) {
       p.taskGroups.forEach(g => {
-        g.tasks.forEach((t,i) => tasks.push({...t, id: tasks.length, group: g.label}));
+        g.tasks.forEach(t => tasks.push({ ...t, id: tasks.length, group: g.label }));
       });
     }
     state.tasks[p.id] = tasks;
-    state.dots[p.id] = { green: [], yellow: [], red: [] };
-    state.qa[p.id] = (p.qa || []).map((q,i) => ({...q, id: i}));
+
+    // Bake in Session 1 dot exercise results as the starting point
+    const s1 = SESSION1_DOTS[p.id] || { green: 0, yellow: 0, red: 0 };
+    state.dots[p.id] = {
+      green: Array.from({ length: s1.green }, (_, i) => i + 1),
+      yellow: Array.from({ length: s1.yellow }, (_, i) => i + 1),
+      red: Array.from({ length: s1.red }, (_, i) => i + 1),
+    };
+
+    state.qa[p.id] = (p.qa || []).map((q, i) => ({ ...q, id: i }));
   });
+  state.parking = JSON.parse(JSON.stringify(DEFAULT_PARKING));
+  state.changelog = JSON.parse(JSON.stringify(DEFAULT_CHANGELOG));
 }
 
 // =====================
 // TABS
 // =====================
-function showTab(name) {
+function showTab(name, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
-  event.target.classList.add('active');
+  if (btn) btn.classList.add('active');
   if (name === 'dashboard') renderDashboard();
 }
 
@@ -593,6 +662,7 @@ function renderPriorities() {
       container.appendChild(header);
     }
     container.appendChild(buildPriorityBlock(p));
+    renderDots(p.id);
   });
 }
 
@@ -734,10 +804,12 @@ function toggleDone(pid, idx, cb) {
   state.tasks[pid][idx].status = cb.checked ? 'Done ✓' : 'Not Yet';
   const label = document.querySelector(`#task-${pid}-${idx} .task-label`);
   if (label) label.classList.toggle('done-label', cb.checked);
+  saveState();
 }
 
 function updateTask(pid, idx, field, value) {
   state.tasks[pid][idx][field] = value;
+  saveState();
 }
 
 function addTask(pid) {
@@ -747,6 +819,7 @@ function addTask(pid) {
   const newTask = { text, dept: '—', status: 'Not Yet', notes: '', group: null, id: state.tasks[pid].length };
   state.tasks[pid].push(newTask);
   input.value = '';
+  saveState();
 
   // Re-render just this priority block
   const block = document.getElementById('priority-' + pid);
@@ -763,6 +836,7 @@ function addQA(pid) {
   const by = document.getElementById('qa-by-' + pid).value.trim();
   if (!q) return;
   state.qa[pid].push({ q, by, answer: '', resolved: false, id: state.qa[pid].length });
+  saveState();
   const p = PRIORITIES.find(pr => pr.id === pid);
   const block = document.getElementById('priority-' + pid);
   const wasOpen = block.classList.contains('open');
@@ -774,10 +848,12 @@ function addQA(pid) {
 
 function answerQA(pid, idx, val) {
   state.qa[pid][idx].answer = val;
+  saveState();
 }
 
 function resolveQA(pid, idx) {
   state.qa[pid][idx].resolved = true;
+  saveState();
   const p = PRIORITIES.find(pr => pr.id === pid);
   const block = document.getElementById('priority-' + pid);
   const wasOpen = block.classList.contains('open');
@@ -793,6 +869,7 @@ function resolveQA(pid, idx) {
 function addDot(pid, color, btn) {
   const ts = Date.now();
   state.dots[pid][color].push(ts);
+  saveState();
   renderDots(pid);
 }
 
@@ -808,6 +885,7 @@ function renderDots(pid) {
 
 function removeDot(pid, color, idx) {
   state.dots[pid][color].splice(idx, 1);
+  saveState();
   renderDots(pid);
 }
 
@@ -826,6 +904,7 @@ function addListeningEntry() {
     followUp: '',
   };
   state.listening.unshift(entry);
+  saveState();
   renderListening();
 }
 
@@ -864,6 +943,8 @@ function renderListening() {
 
 function updateListening(idx, field, value) {
   state.listening[idx][field] = value;
+  saveState();
+  if (field === 'group') renderListening();
 }
 
 // =====================
@@ -880,6 +961,7 @@ function addSessionEntry() {
     nextSteps: '',
     notes: '',
   });
+  saveState();
   renderSessions();
 }
 
@@ -894,7 +976,7 @@ function renderSessions() {
     const card = document.createElement('div');
     card.className = 'session-card';
     card.innerHTML = `
-      <div class="session-field"><label>Session title</label><input type="text" value="${s.title}" onchange="updateSession(${idx},'title',this.value)" placeholder="e.g. Board Retreat Session 1"></div>
+      <div class="session-field"><label>Session title</label><input type="text" value="${(s.title||'').replace(/"/g,'&quot;')}" onchange="updateSession(${idx},'title',this.value)" placeholder="e.g. Board Retreat Session 1"></div>
       <div class="session-date">${s.date}</div>
       <div class="session-field"><label>Attendees</label><textarea onchange="updateSession(${idx},'attendees',this.value)">${s.attendees}</textarea></div>
       <div class="session-field"><label>Decisions made</label><textarea onchange="updateSession(${idx},'decisions',this.value)">${s.decisions}</textarea></div>
@@ -908,6 +990,7 @@ function renderSessions() {
 
 function updateSession(idx, field, value) {
   state.sessions[idx][field] = value;
+  saveState();
 }
 
 // =====================
@@ -916,7 +999,7 @@ function updateSession(idx, field, value) {
 function renderParking() {
   const container = document.getElementById('parking-items');
   container.innerHTML = '';
-  PARKING_LOT.forEach((item, idx) => {
+  state.parking.forEach((item, idx) => {
     const div = document.createElement('div');
     div.className = 'parking-item' + (item.resolved ? ' parking-resolved' : '');
     div.innerHTML = `
@@ -932,14 +1015,15 @@ function renderParking() {
   const addDiv = document.createElement('div');
   addDiv.style = 'margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;';
   addDiv.innerHTML = `
-    <input id="new-parking-title" class="add-task-input" style="flex:1;min-width:200px" placeholder="Add parking lot item...">
+    <input id="new-parking-title" class="add-task-input" style="flex:1;min-width:200px" placeholder="Add parking lot item..." onkeydown="if(event.key==='Enter') addParkingItem()">
     <button class="add-task-btn" onclick="addParkingItem()">Add</button>
   `;
   container.appendChild(addDiv);
 }
 
 function resolveParking(idx) {
-  PARKING_LOT[idx].resolved = true;
+  state.parking[idx].resolved = true;
+  saveState();
   renderParking();
 }
 
@@ -947,8 +1031,9 @@ function addParkingItem() {
   const input = document.getElementById('new-parking-title');
   const title = input.value.trim();
   if (!title) return;
-  PARKING_LOT.push({ title, desc: '', owner: 'TBD', timing: 'TBD', resolved: false });
+  state.parking.push({ title, desc: '', owner: 'TBD', timing: 'TBD', resolved: false });
   input.value = '';
+  saveState();
   renderParking();
 }
 
@@ -956,21 +1041,23 @@ function addParkingItem() {
 // CHANGE LOG
 // =====================
 function addChangeEntry() {
-  CHANGE_LOG.unshift({
+  state.changelog.unshift({
     date: new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'}),
     desc: '',
-    editing: true,
   });
+  saveState();
   renderChangeLog();
 }
 
 function updateChangeLog(idx, field, value) {
-  CHANGE_LOG[idx][field] = value;
+  state.changelog[idx][field] = value;
+  saveState();
 }
 
 function deleteChangeEntry(idx) {
   if (confirm('Remove this change log entry?')) {
-    CHANGE_LOG.splice(idx, 1);
+    state.changelog.splice(idx, 1);
+    saveState();
     renderChangeLog();
   }
 }
@@ -978,13 +1065,13 @@ function deleteChangeEntry(idx) {
 function renderChangeLog() {
   const container = document.getElementById('change-items');
   container.innerHTML = '';
-  CHANGE_LOG.forEach((item, idx) => {
+  state.changelog.forEach((item, idx) => {
     const div = document.createElement('div');
     div.className = 'change-item';
     div.style = 'flex-direction:column;gap:8px;';
     div.innerHTML = `
       <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;">
-        <input type="text" value="${item.date}" onchange="updateChangeLog(${idx},'date',this.value)"
+        <input type="text" value="${(item.date||'').replace(/"/g,'&quot;')}" onchange="updateChangeLog(${idx},'date',this.value)"
           style="font-family:Georgia,serif;font-size:12px;font-weight:700;color:var(--gold);border:1px solid var(--border);border-radius:4px;padding:4px 8px;width:130px;">
         <textarea onchange="updateChangeLog(${idx},'desc',this.value)"
           style="flex:1;min-width:200px;font-family:Georgia,serif;font-size:13px;border:1px solid var(--border);border-radius:4px;padding:6px 10px;resize:vertical;min-height:48px;color:var(--dark);">${item.desc}</textarea>
@@ -998,7 +1085,11 @@ function renderChangeLog() {
 // =====================
 // INIT
 // =====================
-initState();
+// 1. Build the default state (with Session 1 dots baked in)
+initDefaultState();
+// 2. If saved data exists in this browser, it replaces the defaults
+loadState();
+// 3. Render everything from whichever state won
 renderPriorities();
 renderListening();
 renderSessions();
