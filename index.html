@@ -310,7 +310,8 @@ const PRIORITIES = [
       { text: 'Open each curtain speech with new mission statement', dept: 'Events & Programming', status: 'Ongoing', notes: 'Through 2026 season — ongoing practice' },
     ],
     qa: [
-      { q: 'Does the mission reevaluation need to go to the full community for input, or is board adoption sufficient?', by: '', answer: '', resolved: false }
+      { q: 'Does the mission reevaluation need to go to the full community for input, or is board adoption sufficient?', by: '', answer: '', resolved: false },
+      { q: 'I agree with revisions to mission statement — unclear about vision and strategic direction', by: '', answer: '', resolved: false, session: 'Session 1' }
     ]
   },
   {
@@ -325,7 +326,13 @@ const PRIORITIES = [
       { text: 'Document learnings after each session', dept: 'ED', status: 'Ongoing', notes: 'See Listening Log tab' },
       { text: 'Synthesize findings — periodic review across all groups', dept: 'ED', status: 'Not Yet', notes: '' },
     ],
-    qa: []
+    qa: [
+      { q: 'Survey the community (Ouray and County) to identify what THEY want from the Wright', by: '', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'How far have we progressed in making people feel welcome at the Wright?', by: '', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Looking for a clear way to facilitate tracking the data we gather', by: '', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Is this only conversations with community partners (e.g. OCPAG)? Individual community members seem different', by: '', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Create "community" of renters and lessees — promote and support', by: '', answer: '', resolved: false, session: 'Session 1' }
+    ]
   },
   {
     id: 3, phase: 'p1',
@@ -377,7 +384,9 @@ const PRIORITIES = [
       }
     ],
     qa: [
-      { q: 'Board concern: more programming = more revenue. How do we address?', by: '', answer: 'We have just over twice as much programming this year as last year. The framework will demonstrate that volume doesn\'t automatically equal revenue.', resolved: false }
+      { q: 'Board concern: more programming = more revenue. How do we address?', by: '', answer: 'We have just over twice as much programming this year as last year. The framework will demonstrate that volume doesn\'t automatically equal revenue.', resolved: false },
+      { q: 'Program evaluation is very different from employee issues — need to be careful not to alienate community. Agree to a process to review.', by: '', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Concerns about retirement of traditional programs and operational strength', by: '', answer: '', resolved: false, session: 'Session 1' }
     ]
   },
   {
@@ -404,7 +413,10 @@ const PRIORITIES = [
         ]
       }
     ],
-    qa: []
+    qa: [
+      { q: 'Need more detail on this priority', by: 'Vivian', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'All monies contributed could go into one pool. The mission should sustain interest in that. Board can then decide priorities of expenditures.', by: '', answer: '', resolved: false, session: 'Session 1' }
+    ]
   },
   {
     id: 6, phase: 'p2',
@@ -439,7 +451,10 @@ const PRIORITIES = [
         ]
       }
     ],
-    qa: []
+    qa: [
+      { q: 'Need to understand in more detail what staff would be proposing — I have questions about management of endowment fund. We are a long way before we have enough money to manage.', by: 'Vivian', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Green Room as short-term rental — how would this work?', by: '', answer: '', resolved: false, session: 'Session 1' }
+    ]
   },
   {
     id: 7, phase: 'p2',
@@ -479,8 +494,9 @@ const PRIORITIES = [
       }
     ],
     qa: [
-      { q: 'Vivian: Are there other youth programs we\'re modeling?', by: 'Vivian', answer: 'We want to get to know our market first through listening before modeling after others. This is more rigorous, not less.', resolved: false },
-      { q: 'Is the school involved in our youth programming?', by: '', answer: 'Yes — coordinated field trip between Ridgway and Ouray school and Central City Opera last year. Re-engaging in 2026.', resolved: false }
+      { q: 'I like the idea of more programming for youth — would have a lot of questions and concerns about structured youth programming in 2027', by: 'Vivian', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'Are there other youth programs we\'re modeling?', by: 'Lou', answer: 'We want to get to know our market first through listening before modeling after others. This is more rigorous, not less.', resolved: false, session: 'Session 1' },
+      { q: 'Is the school involved in our youth programming?', by: 'Lou', answer: 'Yes — coordinated field trip between Ridgway and Ouray school and Central City Opera last year. Re-engaging in 2026.', resolved: false, session: 'Session 1' }
     ]
   },
   {
@@ -498,7 +514,10 @@ const PRIORITIES = [
       { text: 'Develop diversified funding strategy for Mesker', dept: 'ED', status: 'Not Yet', notes: 'Grants, individual donors, community partners' },
       { text: 'Engage community in Mesker color selection process', dept: 'ED + Marketing', status: 'Not Yet', notes: '' },
     ],
-    qa: []
+    qa: [
+      { q: 'Not sure I agree with how this issue is posed', by: 'Vivian', answer: '', resolved: false, session: 'Session 1' },
+      { q: 'In capital projects do we need to weigh WOH over WND or vice versa, or at all?', by: 'Lou', answer: '', resolved: false, session: 'Session 1' }
+    ]
   },
 ];
 
@@ -513,11 +532,24 @@ const DEFAULT_PARKING = [
 ];
 
 const DEFAULT_CHANGELOG = [
+  { date: 'June 2026', desc: 'Session 1 (June 6) questions and comments added to each priority\'s Questions & Concerns tracker, tagged "Session 1" with attribution where known. Session 1 logged in the Session Log.' },
   { date: 'June 2026', desc: 'Reordered priorities. Program Evaluation moved from Priority 7 to Priority 4 (Phase 1) to reflect its role as a prerequisite for revenue and programming decisions. All downstream priorities renumbered accordingly.' },
   { date: 'June 2026', desc: 'Tracker structure established: Dashboard, Tasks by Priority, Listening Log, Session Log, Parking Lot, Change Log. Three-tab concept expanded to six for completeness.' },
   { date: 'June 2026', desc: 'Board Development removed from priority list per ED decision. Not a 2026 tracked priority.' },
   { date: 'June 2026', desc: 'Donor Relationships & Major Gift Development elevated to its own priority (Priority 5), separate from Financial Stability, reflecting its strategic importance and distinct work stream.' },
 ];
+
+// Pre-loaded Session 1 entry for the Session Log tab
+const SESSION1_LOG_ENTRY = {
+  id: 'session1-june6',
+  date: 'June 6, 2026',
+  title: 'Board Strategic Planning — Session 1',
+  attendees: '',
+  decisions: 'Green/yellow/red dot exercise completed across all 8 priorities (green = confident, yellow = have questions, red = want to discuss). Results recorded on each priority card under "Board confidence." Questions and comments logged per priority, tagged "Session 1."',
+  assignments: '',
+  nextSteps: 'Address open Session 1 questions and red-dot priorities in Session 2.',
+  notes: 'Board question left open: "What would make you feel like you are driving this?" — revisit in Session 2.\n\nTimeline poll — when do you want this strategic plan to take effect: (2) beginning of 3rd quarter · (2) beginning of 4th quarter · (2) within 3 months / 4–6 months depending on how this develops · (1) beginning of 2027.',
+};
 
 // =====================
 // STATE & PERSISTENCE
@@ -564,6 +596,7 @@ function loadState() {
     if (saved.sessions) state.sessions = saved.sessions;
     if (saved.parking) state.parking = saved.parking;
     if (saved.changelog) state.changelog = saved.changelog;
+    state.meta = saved.meta || {};
     return true;
   } catch (e) {
     console.error('Could not load saved data:', e);
@@ -595,6 +628,41 @@ function initDefaultState() {
   });
   state.parking = JSON.parse(JSON.stringify(DEFAULT_PARKING));
   state.changelog = JSON.parse(JSON.stringify(DEFAULT_CHANGELOG));
+  state.sessions = [JSON.parse(JSON.stringify(SESSION1_LOG_ENTRY))];
+  state.meta = { s1Loaded: true };
+}
+
+// One-time merge: if this browser has saved data from before the Session 1
+// questions were baked in, add them without touching anything already saved.
+function ensureSession1Data() {
+  state.meta = state.meta || {};
+  if (state.meta.s1Loaded) return;
+
+  // Remove the old misattributed P7 item (was "Vivian:" but Lou asked it)
+  if (state.qa[7]) {
+    state.qa[7] = state.qa[7].filter(item => !(item.q || '').startsWith('Vivian: Are there other youth programs'));
+  }
+
+  // Merge in any default Q&A items this browser doesn't have yet
+  PRIORITIES.forEach(p => {
+    if (!state.qa[p.id]) state.qa[p.id] = [];
+    (p.qa || []).forEach(def => {
+      const exists = state.qa[p.id].some(item => item.q === def.q);
+      if (!exists) state.qa[p.id].push({ ...def, id: state.qa[p.id].length });
+    });
+  });
+
+  // Add the Session 1 entry to the Session Log if it isn't there
+  const hasS1 = state.sessions.some(s => (s.title || '').includes('Session 1'));
+  if (!hasS1) state.sessions.push(JSON.parse(JSON.stringify(SESSION1_LOG_ENTRY)));
+
+  // Note the change in the change log
+  const clNote = DEFAULT_CHANGELOG[0];
+  const hasNote = state.changelog.some(c => c.desc === clNote.desc);
+  if (!hasNote) state.changelog.unshift({ ...clNote });
+
+  state.meta.s1Loaded = true;
+  saveState();
 }
 
 // =====================
@@ -793,7 +861,7 @@ function buildQAItem(pid, item, idx) {
   div.className = 'qa-item' + (item.resolved ? ' resolved' : '');
   div.innerHTML = `
     <div class="qa-q">${item.q}</div>
-    ${item.by ? `<div class="qa-meta">Asked by: ${item.by}</div>` : ''}
+    ${item.session || item.by ? `<div class="qa-meta">${item.session ? `<span class="tag" style="margin-left:0;margin-right:6px">${item.session}</span>` : ''}${item.by ? `Asked by: ${item.by}` : ''}</div>` : ''}
     ${item.answer ? `<div class="qa-answer">${item.answer}</div>` : `<textarea class="task-notes" style="width:100%;margin-top:6px" placeholder="Add answer / resolution..." onchange="answerQA(${pid},${idx},this.value)"></textarea>`}
     ${!item.resolved ? `<button class="btn-sm" style="margin-top:6px" onclick="resolveQA(${pid},${idx})">Mark resolved</button>` : '<div style="font-size:11px;color:var(--green);margin-top:4px">✓ Resolved</div>'}
   `;
@@ -1089,6 +1157,8 @@ function renderChangeLog() {
 initDefaultState();
 // 2. If saved data exists in this browser, it replaces the defaults
 loadState();
+// 2b. One-time merge of Session 1 questions into older saved data
+ensureSession1Data();
 // 3. Render everything from whichever state won
 renderPriorities();
 renderListening();
